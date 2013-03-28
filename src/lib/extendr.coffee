@@ -14,9 +14,12 @@ extendr =
 		return @deepExtendPlainObjects(args...)
 
 	# Extend
-	# Alias for Shallow Extend
 	extend: (args...) ->
 		return @shallowExtendPlainObjects(args...)
+
+	# Deep Extend
+	deepExtend: (args...) ->
+		return @deepExtendPlainObjects(args...)
 
 	# Shallow extend plain objects
 	shallowExtendPlainObjects: (target,objs...) ->

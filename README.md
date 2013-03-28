@@ -45,6 +45,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 - `deepClone(args...)` - deep extend the arguments into a new object, same as `deepExtend({},args...)`
 - `dereference(obj)` - return a copy of the object with all references destroyed, same as serializing then deserializing the object
 - `extend(args...)` - alias for `shallowExtendPlainObjects`
+- `deepExtend(args...)` - alias for `deepExtendPlainObjects`
 - `shallowExtendPlainObjects(target, args...)` - shallow extend the arguments into the target
 - `deepExtendPlainObjects(target, args...)` - deep extend the arguments into the target
 - `safeShallowExtendPlainObjects(target, objs...)` - shallow extend defined values from the arguments into the target
