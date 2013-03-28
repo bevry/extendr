@@ -51,7 +51,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 - `safeShallowExtendPlainObjects(target, objs...)` - shallow extend defined values from the arguments into the target
 - `safeDeepExtendPlainObjects(target, args...)` - deep extend defined values from the arguments into the target
 
-### Explanation
+### Notes
 
 - Use the clone methods when you don't want to modify your first object
 - Use the extend methods when you want to modify the first argument
