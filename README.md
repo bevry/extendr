@@ -1,5 +1,11 @@
-# Extendr [![Build Status](https://secure.travis-ci.org/bevry/extendr.png?branch=master)](http://travis-ci.org/bevry/extendr)
+# Extendr
+
+[![Build Status](https://secure.travis-ci.org/bevry/extendr.png?branch=master)](http://travis-ci.org/bevry/extendr)
+[![NPM version](https://badge.fury.io/js/extendr.png)](https://npmjs.org/package/extendr)
+[![Flattr this project](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr)
+
 Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways
+
 
 
 ## Install
