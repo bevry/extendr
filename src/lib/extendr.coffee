@@ -45,7 +45,9 @@ extendr =
 			for own key,value of obj
 				if typeChecker.isPlainObject(value)
 					target[key] = {}  unless typeChecker.isPlainObject(target[key])
-					@deepExtendPlainObjects(target[key],value)
+					@deepExtendPlainObjects(target[key], value)
+				else if typeChecker.isArray(value)
+					target[key] = value.slice()
 				else
 					target[key] = value
 		return target
@@ -58,7 +60,9 @@ extendr =
 				continue  unless value?
 				if typeChecker.isPlainObject(value)
 					target[key] = {}  unless typeChecker.isPlainObject(target[key])
-					@safeDeepExtendPlainObjects(target[key],value)
+					@safeDeepExtendPlainObjects(target[key], value)
+				else if typeChecker.isArray(value)
+					target[key] = value.slice()
 				else
 					target[key] = value
 		return target

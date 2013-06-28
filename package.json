@@ -1,6 +1,6 @@
 {
 	"name": "extendr",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"description": "Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways",
 	"homepage": "https://github.com/bevry/extendr",
 	"keywords": [
@@ -28,7 +28,9 @@
 	},
 	"devDependencies": {
 		"coffee-script": "~1.6.2",
-		"joe": "~1.1.2"
+		"joe": "~1.2.0",
+		"joe-reporter-console": "~1.2.1",
+		"chai": "~1.7.2"
 	},
 	"directories": {
 		"lib": "./out/lib"
