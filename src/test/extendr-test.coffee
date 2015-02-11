@@ -88,6 +88,10 @@ joe.describe 'extendr', (describe,it) ->
 				b: 1
 			c: [1]
 			d: 1
+			e:
+				f: 
+					g: 1
+					h: 2
 		src2 =
 			d: null
 		out1Expected =
@@ -95,11 +99,19 @@ joe.describe 'extendr', (describe,it) ->
 				b: 2
 			c: [1,2]
 			d: null
+			e:
+				f:
+					g: 1
+					h: 2
 		src1Expected =
 			a:
 				b: 1
 			c: [1]
 			d: 1
+			e:
+				f: 
+					g: 1
+					h: 2
 
 		# Get result
 		out1 = extendr.deepExtendPlainObjects({}, src1, src2)
