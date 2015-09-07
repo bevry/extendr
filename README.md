@@ -1,25 +1,10 @@
-# Extendr
+<!-- TITLE -->
 
-[![Build Status](https://secure.travis-ci.org/bevry/extendr.png?branch=master)](http://travis-ci.org/bevry/extendr)
-[![NPM version](https://badge.fury.io/js/extendr.png)](https://npmjs.org/package/extendr)
-[![Flattr this project](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr)
+<!-- BADGES -->
 
-Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways
+<!-- DESCRIPTION -->
 
-
-
-## Install
-
-### Backend
-
-1. [Install Node.js](http://bevry.me/node/install)
-2. `npm install --save extendr`
-
-### Frontend
-
-1. [See Browserify](http://browserify.org)
-
-
+<!-- INSTALL -->
 
 ## Usage
 
@@ -65,13 +50,10 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 - Use the safe methods when you don't want `null` and `undefined` values to overwrite a defined values
 
 
+<!-- HISTORY -->
 
-## History
-You can discover the history inside the [History.md](https://github.com/bevry/extendr/blob/master/History.md#files) file
+<!-- CONTRIBUTE -->
 
+<!-- BACKERS -->
 
-
-## License
-Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
-<br/>Copyright © 2013+ [Bevry Pty Ltd](http://bevry.me)
-<br/>Copyright © 2011-2012 [Benjamin Arthur Lupton](http://balupton.com)
+<!-- LICENSE -->

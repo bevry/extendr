@@ -1,27 +1,27 @@
-# Import
+// Import
 typeChecker = require('typechecker')
 
-# Define
-extendr =
-	# Clone
+// Define
+extendr = {
+	// Clone
 	clone: (args...) ->
 		args.unshift({})
 		return @shallowExtendPlainObjects(args...)
 
-	# Deep Clone
+	// Deep Clone
 	deepClone: (args...) ->
 		args.unshift({})
 		return @deepExtendPlainObjects(args...)
 
-	# Extend
+	// Extend
 	extend: (args...) ->
 		return @shallowExtendPlainObjects(args...)
 
-	# Deep Extend
+	// Deep Extend
 	deepExtend: (args...) ->
 		return @deepExtendPlainObjects(args...)
 
-	# Shallow extend plain objects
+	// Shallow extend plain objects
 	shallowExtendPlainObjects: (target,objs...) ->
 		for obj in objs
 			obj or= {}
@@ -29,7 +29,7 @@ extendr =
 				target[key] = value
 		return target
 
-	# Safe Shallow extend plain objects
+	// Safe Shallow extend plain objects
 	safeShallowExtendPlainObjects: (target,objs...) ->
 		for obj in objs
 			obj or= {}
@@ -38,7 +38,7 @@ extendr =
 				target[key] = value
 		return target
 
-	# Deep extend plain objects
+	// Deep extend plain objects
 	deepExtendPlainObjects: (target,objs...) ->
 		for obj in objs
 			obj or= {}
@@ -52,7 +52,7 @@ extendr =
 					target[key] = value
 		return target
 
-	# Safe Deep extend plain objects
+	// Safe Deep extend plain objects
 	safeDeepExtendPlainObjects: (target,objs...) ->
 		for obj in objs
 			obj or= {}
@@ -67,11 +67,12 @@ extendr =
 					target[key] = value
 		return target
 
-	# Return a dereferenced copy of the object
-	# Will not keep functions
+	// Return a dereferenced copy of the object
+	// Will not keep functions
 	dereference: (source) ->
 		target = JSON.parse(JSON.stringify(source))
 		return target
+}
 
-# Export
+// Export
 module.exports = extendr
