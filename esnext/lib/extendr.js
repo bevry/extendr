@@ -7,10 +7,9 @@ export function custom ({defaults = false, traverse = false}, target, ...objs) {
 		if ( !typeChecker.isPlainObject(obj) )  continue
 		for ( const key in obj ) {
 			if ( obj.hasOwnProperty(key) ) {
-				debugger
 				// if not defaults only, always overwrite
 				// if defaults only, overwrite if current value is empty
-				if ( defaults && target[key] != null )  continue
+				const defaultSkip = defaults && target[key] != null
 
 				// get the new value
 				let newValue = obj[key]
@@ -18,18 +17,20 @@ export function custom ({defaults = false, traverse = false}, target, ...objs) {
 				// ensure everything is new
 				if ( typeChecker.isPlainObject(newValue) ) {
 					if ( traverse ) {
-						newValue = custom({traverse, defaults}, {}, target[key], newValue)
+						target[key] = custom({traverse, defaults}, {}, target[key], newValue)
+					}
+					else if ( !defaultSkip ) {
+						target[key] = custom({defaults}, {}, newValue)
+					}
+				}
+				else if ( !defaultSkip ) {
+					if ( typeChecker.isArray(newValue) ) {
+						target[key] = newValue.slice()
 					}
 					else {
-						newValue = custom({defaults}, {}, newValue)
+						target[key] = newValue
 					}
 				}
-				else if ( typeChecker.isArray(newValue) ) {
-					newValue = newValue.slice()
-				}
-
-				// apply the new value
-				target[key] = newValue
 			}
 		}
 	}
