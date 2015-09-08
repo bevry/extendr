@@ -17,15 +17,29 @@ export function custom ({defaults = false, traverse = false}, target, ...objs) {
 				// ensure everything is new
 				if ( typeChecker.isPlainObject(newValue) ) {
 					if ( traverse ) {
-						if ( !typeChecker.isPlainObject(target[key]) )  target[key] = {}
-						custom({traverse, defaults}, target[key], newValue)
+						// replace current value with
+						// dereferenced merged new object
+						target[key] = custom({traverse, defaults}, {}, target[key], newValue)
 					}
 					else if ( !defaultSkip ) {
-						target[key] = newValue
+						// replace current value with
+						// dereferenced new object
+						target[key] = custom({defaults}, {}, newValue)
 					}
 				}
 				else if ( !defaultSkip ) {
-					target[key] = newValue
+					if ( typeChecker.isArray(newValue) ) {
+						// replace current value with
+						// dereferenced new array
+						target[key] = newValue.slice()
+					}
+					else {
+						// replace current value with
+						// possibly referenced: function, class, etc
+						// possibly unreferenced: string
+						// new value
+						target[key] = newValue
+					}
 				}
 			}
 		}

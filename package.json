@@ -65,7 +65,6 @@
     "meta": "node --harmony nakefile.js meta",
     "prepare": "node --harmony nakefile.js prepare",
     "release": "node --harmony nakefile.js release",
-
     "test": "node --harmony ./es5/test/extendr-test.js"
   },
   "nakeConfiguration": {
