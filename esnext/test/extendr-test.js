@@ -54,18 +54,21 @@ joe.suite('extendr', function (suite, test) {
 					function: function () { return 0 },
 					number: 0,
 					empty: null,
+					base: 0,
 					originalStranger: 0
 				},
 				array: [0],
 				function: function () { return 0 },
 				number: 0,
 				empty: null,
+				base: 0,
 				originalStranger: 0
 			},
 			array: [0],
 			function: function () { return 0 },
 			number: 0,
 			empty: null,
+			base: 0,
 			originalStranger: 0
 		}
 	}
@@ -77,18 +80,21 @@ joe.suite('extendr', function (suite, test) {
 					function: function () { return 1 },
 					number: 1,
 					empty: 1,
+					base: null,
 					inputStranger: 1
 				},
 				array: [1],
 				function: function () { return 1 },
 				number: 1,
 				empty: 1,
+				base: null,
 				inputStranger: 1
 			},
 			array: [1],
 			function: function () { return 1 },
 			number: 1,
 			empty: 1,
+			base: null,
 			inputStranger: 1
 		}
 	}
@@ -130,6 +136,7 @@ joe.suite('extendr', function (suite, test) {
 					function: input.object.object.function,  // input
 					number: 1,
 					empty: 1,
+					base: null,
 					// notice how originalStranger is missing, this is important
 					inputStranger: 1
 				},
@@ -137,6 +144,7 @@ joe.suite('extendr', function (suite, test) {
 				function: input.object.function,  // input
 				number: 1,
 				empty: 1,
+				base: null,
 				// notice how originalStranger is missing, this is important
 				inputStranger: 1
 			},
@@ -144,6 +152,7 @@ joe.suite('extendr', function (suite, test) {
 			function: input.function,  // input
 			number: 1,
 			empty: 1,
+			base: null,
 			originalStranger: 0,
 			inputStranger: 1
 		}
@@ -172,18 +181,21 @@ joe.suite('extendr', function (suite, test) {
 					function: original.object.object.function,  // original
 					number: 0,
 					empty: null,
+					base: 0,
 					originalStranger: 0
 				},
 				array: [0],  // new
 				function: original.object.function,  // original
 				number: 0,
 				empty: null,
+				base: 0,
 				originalStranger: 0
 			},
 			array: [0],  // new
 			function: original.function,  // original
 			number: 0,
 			empty: 1,
+			base: 0,
 			originalStranger: 0,
 			inputStranger: 1
 		}
@@ -212,6 +224,7 @@ joe.suite('extendr', function (suite, test) {
 					function: input.object.object.function,  // input
 					number: 1,
 					empty: 1,
+					base: null,
 					originalStranger: 0,  // notice my presence
 					inputStranger: 1
 				},
@@ -219,6 +232,7 @@ joe.suite('extendr', function (suite, test) {
 				function: input.object.function,  // input
 				number: 1,
 				empty: 1,
+				base: null,
 				originalStranger: 0,  // notice my presence
 				inputStranger: 1
 			},
@@ -226,6 +240,7 @@ joe.suite('extendr', function (suite, test) {
 			function: input.function,  // input
 			number: 1,
 			empty: 1,
+			base: null,
 			originalStranger: 0,
 			inputStranger: 1
 		}
@@ -254,6 +269,7 @@ joe.suite('extendr', function (suite, test) {
 					function: original.object.object.function,  // original
 					number: 0,
 					empty: 1,
+					base: 0,
 					originalStranger: 0,
 					inputStranger: 1
 				},
@@ -261,6 +277,7 @@ joe.suite('extendr', function (suite, test) {
 				function: original.object.function,  // original
 				number: 0,
 				empty: 1,
+				base: 0,
 				originalStranger: 0,
 				inputStranger: 1
 			},
@@ -268,6 +285,7 @@ joe.suite('extendr', function (suite, test) {
 			function: original.function,  // original
 			number: 0,
 			empty: 1,
+			base: 0,
 			originalStranger: 0,
 			inputStranger: 1
 		}
