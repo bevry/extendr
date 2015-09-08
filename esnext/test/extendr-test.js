@@ -1,165 +1,178 @@
 // Import
 const assert = require('assert-helpers')
+const typeChecker = require('typechecker')
 const joe = require('joe')
 const extendr = require('../../')
 
 // Test
 joe.suite('extendr', function (suite, test) {
 	// Prepare
-	const testOriginData = {
-		object: {
+	function getOriginData () {
+		return {
 			object: {
-				array: [0],
-				number: 0,
-				empty: null,
-				originStranger: 0
-			},
-			array: [0],
-			number: 0,
-			empty: null,
-			originStranger: 0
-		},
-		array: [0],
-		number: 0,
-		empty: null,
-		originStranger: 0
-	}
-	const testFirstInputData = {
-		object: {
-			object: {
-				array: [1],
-				number: 1,
-				empty: 1,
-				firstStranger: 1
-			},
-			array: [1],
-			number: 1,
-			empty: 1,
-			firstStranger: 1
-		},
-		array: [1],
-		number: 1,
-		empty: 1,
-		firstStranger: 1
-	}
-	const tests = {
-		extend: {
-			opts: {traverse: false, defaults: null},
-			alias: 'extend',
-			output: {
 				object: {
-					object: {
-						array: [1],
-						number: 1,
-						empty: 1,
-						firstStranger: 1
-					},
-					array: [1],
-					number: 1,
-					empty: 1,
-					firstStranger: 1
-				},
-				array: [1],
-				number: 1,
-				empty: 1,
-				originStranger: 0,
-				firstStranger: 1
-			}
-		},
-		'extend with defaults': {
-			opts: {defaults: true},
-			output: {
-				object: {
-					object: {
-						array: [0],
-						number: 0,
-						empty: null,
-						originStranger: 0
-					},
 					array: [0],
+					function: function () { return 0 },
 					number: 0,
 					empty: null,
 					originStranger: 0
 				},
 				array: [0],
+				function: function () { return 0 },
 				number: 0,
-				empty: 1,
-				originStranger: 0,
-				firstStranger: 1
-			}
-		},
-		'extend with traverse': {
-			opts: {traverse: true},
-			output: {
+				empty: null,
+				originStranger: 0
+			},
+			array: [0],
+			function: function () { return 0 },
+			number: 0,
+			empty: null,
+			originStranger: 0
+		}
+	}
+	function getInputData () {
+		return {
+			object: {
 				object: {
-					object: {
-						array: [1],
-						number: 1,
-						empty: 1,
-						originStranger: 0,
-						firstStranger: 1
-					},
 					array: [1],
+					function: function () { return 1 },
+					number: 1,
+					empty: 1,
+					firstStranger: 1
+				},
+				array: [1],
+				function: function () { return 1 },
+				number: 1,
+				empty: 1,
+				firstStranger: 1
+			},
+			array: [1],
+			function: function () { return 1 },
+			number: 1,
+			empty: 1,
+			firstStranger: 1
+		}
+	}
+
+	function check ({prefix = 'result', output, expected, suite, test}) {
+		test(`${prefix}:keys`, function () {
+			assert.deepEqual(Object.keys(output), Object.keys(expected), `${prefix} keys are as expected`)
+		})
+		suite(`${prefix}:values`, function (suite, test) {
+			Object.keys(output).forEach(function (key) {
+				test(`${prefix}.${key}:value`, function () {
+					assert.equal(output[key], expected[key], `${prefix}.${key} is set and referenced correctly`)
+
+					if ( typeChecker.isPlainObject(output[key]) ) {
+						check({
+							prefix: `${prefix}.${key}`,
+							output: output[key],
+							expected: expected[key],
+							suite: suite,
+							test: test
+						})
+					}
+				})
+			})
+		})
+	}
+
+	suite('extend', function (suite, test) {
+		const origin = getOriginData()
+		const input = getInputData()
+		const opts = {traverse: false, defaults: false}
+		const expected = {
+			object: input.object,
+			array: input.array,
+			function: input.function,
+			number: 1,
+			empty: 1,
+			originStranger: 0,
+			firstStranger: 1
+		}
+		const output = extendr.custom(opts, origin, input)
+		check({output, expected, suite, test})
+	})
+
+	suite('extend with defaults', function (suite, test) {
+		const origin = getOriginData()
+		const input = getInputData()
+		const opts = {traverse: false, defaults: true}
+		const expected = {
+			object: origin.object,
+			array: origin.array,
+			function: origin.function,
+			number: 0,
+			empty: 1,
+			originStranger: 0,
+			firstStranger: 1
+		}
+		const output = extendr.custom(opts, origin, input)
+		check({output, expected, suite, test})
+	})
+
+	suite('extend with traverse', function (suite, test) {
+		const origin = getOriginData()
+		const input = getInputData()
+		const opts = {traverse: true, defaults: false}
+		const expected = {
+			object: {
+				object: {
+					array: input.object.object.array,
+					function: input.object.object.function,
 					number: 1,
 					empty: 1,
 					originStranger: 0,
 					firstStranger: 1
 				},
-				array: [1],
+				array: input.object.array,
+				function: input.object.function,
 				number: 1,
 				empty: 1,
 				originStranger: 0,
 				firstStranger: 1
-			}
-		},
-		'extend with traverse and defaults': {
-			opts: {traverse: true, defaults: true},
-			output: {
+			},
+			array: input.array,
+			function: input.function,
+			number: 1,
+			empty: 1,
+			originStranger: 0,
+			firstStranger: 1
+		}
+		const output = extendr.custom(opts, origin, input)
+		check({output, expected, suite, test})
+	})
+
+	suite('extend with traverse and defaults', function (suite, test) {
+		const origin = getOriginData()
+		const input = getInputData()
+		const opts = {traverse: true, defaults: true}
+		const expected = {
+			object: {
 				object: {
-					object: {
-						array: [0],
-						number: 0,
-						empty: 1,
-						originStranger: 0,
-						firstStranger: 1
-					},
-					array: [0],
+					array: origin.object.object.array,
+					function: origin.object.object.function,
 					number: 0,
-					empty: 1,
+					empty: 0,
 					originStranger: 0,
 					firstStranger: 1
 				},
-				array: [0],
+				array: origin.object.array,
+				function: origin.object.function,
 				number: 0,
-				empty: 1,
+				empty: 0,
 				originStranger: 0,
 				firstStranger: 1
-			}
+			},
+			array: origin.array,
+			function: origin.function,
+			number: 0,
+			empty: 0,
+			originStranger: 0,
+			firstStranger: 1
 		}
-	}
-
-	// @TODO add function property, and check reference for that
-	// ^ will possibly mean, as we can't dereference functions, perhaps we shouldn't dereference anything
-	Object.keys(tests).forEach(function (name) {
-		suite(name, function (suite, test) {
-			const origin = JSON.parse(JSON.stringify(testOriginData))
-			const first = JSON.parse(JSON.stringify(testFirstInputData))
-			const value = tests[name]
-			const output = extendr.custom(value.opts, origin, first)
-
-			test('results', function () {
-				assert.deepEqual(output, value.output, 'output content was as expected')
-				assert.deepEqual(output === origin, true, 'output object is the origin object')
-			})
-
-			test('result should not reference anything from the first input', function () {
-				assert.equal(output.object !== first.object, true, 'object reference')
-				assert.equal(output.array !== first.array, true,  'array reference')
-				assert.equal(output.object.object !== first.object.object, true, 'object.object reference')
-				assert.equal(output.object.array !== first.object.array, true, 'object.array reference')
-				assert.equal(output.object.object.array !== first.object.object.array, true, 'object.object.array reference')
-			})
-		})
+		const output = extendr.custom(opts, origin, input)
+		check({output, expected, suite, test})
 	})
 
 })

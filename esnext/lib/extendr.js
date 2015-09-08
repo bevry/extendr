@@ -17,19 +17,15 @@ export function custom ({defaults = false, traverse = false}, target, ...objs) {
 				// ensure everything is new
 				if ( typeChecker.isPlainObject(newValue) ) {
 					if ( traverse ) {
-						target[key] = custom({traverse, defaults}, {}, target[key], newValue)
+						if ( !typeChecker.isPlainObject(target[key]) )  target[key] = {}
+						custom({traverse, defaults}, target[key], newValue)
 					}
 					else if ( !defaultSkip ) {
-						target[key] = custom({defaults}, {}, newValue)
+						target[key] = newValue
 					}
 				}
 				else if ( !defaultSkip ) {
-					if ( typeChecker.isArray(newValue) ) {
-						target[key] = newValue.slice()
-					}
-					else {
-						target[key] = newValue
-					}
+					target[key] = newValue
 				}
 			}
 		}

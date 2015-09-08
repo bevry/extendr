@@ -205,11 +205,6 @@ const actions = {
 		// Steps
 		steps(next, [
 			function (complete) {
-				console.log('\nnake setup')
-				actions.setup(opts, complete)
-			},
-
-			function (complete) {
 				if ( !config.COFFEE_SRC_PATH || !fsUtil.existsSync(COFFEE) )  return complete()
 				console.log('\ncoffee compile:')
 				spawn(NODE, [COFFEE, '-co', config.COFFEE_OUT_PATH, config.COFFEE_SRC_PATH], {output: true, cwd: APP_PATH}, complete)
@@ -232,11 +227,6 @@ const actions = {
 	watch: function (opts, next) {
 		// Steps
 		steps(next, [
-			function (complete) {
-				console.log('\nnake setup')
-				actions.setup(opts, complete)
-			},
-
 			function (complete) {
 				if ( !config.BABEL_SRC_PATH || !fsUtil.existsSync(BABEL) )  return complete()
 				console.log('\nbabel compile:')
