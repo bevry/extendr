@@ -170,49 +170,6 @@ joe.suite('extendr', function (suite, test) {
 		check({suite, test, original, input, output, values, references})
 	})
 
-	suite('extend with defaults', function (suite, test) {
-		const original = getOriginalData()
-		const input = getInputData()
-		const opts = {traverse: false, defaults: true}
-		const values = {
-			object: {  // new
-				object: {  // new
-					array: [0],  // new
-					function: original.object.object.function,  // original
-					number: 0,
-					empty: null,
-					base: 0,
-					originalStranger: 0
-				},
-				array: [0],  // new
-				function: original.object.function,  // original
-				number: 0,
-				empty: null,
-				base: 0,
-				originalStranger: 0
-			},
-			array: [0],  // new
-			function: original.function,  // original
-			number: 0,
-			empty: 1,
-			base: 0,
-			originalStranger: 0,
-			inputStranger: 1
-		}
-		const references = {
-			'object': 'new',
-			'array': 'new',
-			'function': 'origin',
-			'object.object': 'new',
-			'object.array': 'new',
-			'object.function': 'origin',
-			'object.object.array': 'new',
-			'object.object.function': 'origin'
-		}
-		const output = extendr.custom(opts, {}, original, input)
-		check({suite, test, original, input, output, values, references})
-	})
-
 	suite('extend with traverse', function (suite, test) {
 		const origin = getOriginalData()
 		const input = getInputData()
@@ -256,6 +213,49 @@ joe.suite('extendr', function (suite, test) {
 		}
 		const output = extendr.custom(opts, {}, origin, input)
 		check({suite, test, origin, input, output, values, references})
+	})
+
+	suite('extend with defaults', function (suite, test) {
+		const original = getOriginalData()
+		const input = getInputData()
+		const opts = {traverse: false, defaults: true}
+		const values = {
+			object: {  // new
+				object: {  // new
+					array: [0],  // new
+					function: original.object.object.function,  // original
+					number: 0,
+					empty: null,
+					base: 0,
+					originalStranger: 0
+				},
+				array: [0],  // new
+				function: original.object.function,  // original
+				number: 0,
+				empty: null,
+				base: 0,
+				originalStranger: 0
+			},
+			array: [0],  // new
+			function: original.function,  // original
+			number: 0,
+			empty: 1,
+			base: 0,
+			originalStranger: 0,
+			inputStranger: 1
+		}
+		const references = {
+			'object': 'new',
+			'array': 'new',
+			'function': 'origin',
+			'object.object': 'new',
+			'object.array': 'new',
+			'object.function': 'origin',
+			'object.object.array': 'new',
+			'object.object.function': 'origin'
+		}
+		const output = extendr.custom(opts, {}, original, input)
+		check({suite, test, original, input, output, values, references})
 	})
 
 	suite('extend with traverse and defaults', function (suite, test) {
