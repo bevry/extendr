@@ -1,78 +1,57 @@
 // Import
-typeChecker = require('typechecker')
+const typeChecker = require('typechecker')
 
-// Define
-extendr = {
-	// Clone
-	clone: (args...) ->
-		args.unshift({})
-		return @shallowExtendPlainObjects(args...)
+// Extend with customisations
+export function custom ({defaults = false, traverse = false}, target, ...objs) {
+	for ( const obj of objs ) {
+		if ( !typeChecker.isPlainObject(obj) )  continue
+		for ( const key in obj ) {
+			if ( obj.hasOwnProperty(key) ) {
+				debugger
+				// if not defaults only, always overwrite
+				// if defaults only, overwrite if current value is empty
+				if ( defaults && target[key] != null )  continue
 
-	// Deep Clone
-	deepClone: (args...) ->
-		args.unshift({})
-		return @deepExtendPlainObjects(args...)
+				// get the new value
+				let newValue = obj[key]
 
-	// Extend
-	extend: (args...) ->
-		return @shallowExtendPlainObjects(args...)
+				// ensure everything is new
+				if ( typeChecker.isPlainObject(newValue) ) {
+					if ( traverse ) {
+						newValue = custom({traverse, defaults}, {}, target[key], newValue)
+					}
+					else {
+						newValue = custom({defaults}, {}, newValue)
+					}
+				}
+				else if ( typeChecker.isArray(newValue) ) {
+					newValue = newValue.slice()
+				}
 
-	// Deep Extend
-	deepExtend: (args...) ->
-		return @deepExtendPlainObjects(args...)
-
-	// Shallow extend plain objects
-	shallowExtendPlainObjects: (target,objs...) ->
-		for obj in objs
-			obj or= {}
-			for own key,value of obj
-				target[key] = value
-		return target
-
-	// Safe Shallow extend plain objects
-	safeShallowExtendPlainObjects: (target,objs...) ->
-		for obj in objs
-			obj or= {}
-			for own key,value of obj
-				continue  unless value?
-				target[key] = value
-		return target
-
-	// Deep extend plain objects
-	deepExtendPlainObjects: (target,objs...) ->
-		for obj in objs
-			obj or= {}
-			for own key,value of obj
-				if typeChecker.isPlainObject(value)
-					target[key] = {}  unless typeChecker.isPlainObject(target[key])
-					@deepExtendPlainObjects(target[key], value)
-				else if typeChecker.isArray(value)
-					target[key] = value.slice()
-				else
-					target[key] = value
-		return target
-
-	// Safe Deep extend plain objects
-	safeDeepExtendPlainObjects: (target,objs...) ->
-		for obj in objs
-			obj or= {}
-			for own key,value of obj
-				continue  unless value?
-				if typeChecker.isPlainObject(value)
-					target[key] = {}  unless typeChecker.isPlainObject(target[key])
-					@safeDeepExtendPlainObjects(target[key], value)
-				else if typeChecker.isArray(value)
-					target[key] = value.slice()
-				else
-					target[key] = value
-		return target
-
-	// Return a dereferenced copy of the object
-	// Will not keep functions
-	dereference: (source) ->
-		target = JSON.parse(JSON.stringify(source))
-		return target
+				// apply the new value
+				target[key] = newValue
+			}
+		}
+	}
+	return target
 }
 
-// Export
-module.exports = extendr
+// Extend without customisations
+export function extend (...args) {
+	return custom({}, ...args)
+}
+
+// Extend deeply
+export function deep (...args) {
+	return custom({traverse: true}, {}, ...args)
+}
+
+// Extend safely
+export function safe (...args) {
+	return custom({defaults: true}, {}, ...args)
+}
+
+// Will not keep functions
+export function dereference (source) {
+	return JSON.parse(JSON.stringify(source))
+}

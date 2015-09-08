@@ -55,9 +55,18 @@
     "joe-reporter-console": "^1.2.1",
     "projectz": "^0.5.0"
   },
-  "main": "./es/lib/extendr.js",
+  "main": "./esnextguardian.js",
   "scripts": {
-    "test": "node ./es/test/extendr-test.js"
+    "clean": "node --harmony nakefile.js clean",
+    "setup": "node --harmony nakefile.js setup",
+    "compile": "node --harmony nakefile.js compile",
+    "watch": "node --harmony nakefile.js watch",
+    "verify": "node --harmony nakefile.js verify",
+    "meta": "node --harmony nakefile.js meta",
+    "prepare": "node --harmony nakefile.js prepare",
+    "release": "node --harmony nakefile.js release",
+
+    "test": "node --harmony ./es5/test/extendr-test.js"
   },
   "nakeConfiguration": {
     "BABEL_SRC_PATH": "esnext",
