@@ -1,59 +1,128 @@
 <!-- TITLE -->
 
-<!-- BADGES -->
+<!-- BADGES/ -->
 
-<!-- DESCRIPTION -->
+[![Build Status](https://img.shields.io/travis/bevry/extendr/master.svg)](http://travis-ci.org/bevry/extendr "Check this project's build status on TravisCI")
+[![NPM version](https://img.shields.io/npm/v/extendr.svg)](https://npmjs.org/package/extendr "View this project on NPM")
+[![NPM downloads](https://img.shields.io/npm/dm/extendr.svg)](https://npmjs.org/package/extendr "View this project on NPM")
+[![Dependency Status](https://img.shields.io/david/bevry/extendr.svg)](https://david-dm.org/bevry/extendr)
+[![Dev Dependency Status](https://img.shields.io/david/dev/bevry/extendr.svg)](https://david-dm.org/bevry/extendr#info=devDependencies)<br/>
+[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
+[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://bevry.me/bitcoin "Donate once-off to this project using BitCoin")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](https://bevry.me/wishlist "Buy an item on our wishlist for us")
 
-<!-- INSTALL -->
+<!-- /BADGES -->
+
+
+<!-- DESCRIPTION/ -->
+
+Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways
+
+<!-- /DESCRIPTION -->
+
+
+<!-- INSTALL/ -->
+
+## Install
+
+### [NPM](http://npmjs.org/)
+- Use: `require('extendr')`
+- Install: `npm install --save extendr`
+
+### [Browserify](http://browserify.org/)
+- Use: `require('extendr')`
+- Install: `npm install --save extendr`
+- CDN URL: `//wzrd.in/bundle/extendr@3.0.0`
+
+### [Ender](http://enderjs.com)
+- Use: `require('extendr')`
+- Install: `ender add extendr`
+
+<!-- /INSTALL -->
+
 
 ## Usage
 
-### Example
+### API
 
-``` javascript
-// Shallow Clone
-(function(){
-	var a = {a:1}, b = {b:2}
-	var c = require('extendr').clone(a,b)
-	console.log(a) // {a:1}
-	console.log(b) // {b:2}
-	console.log(c) // {a:1,b:2}
-})()
-
-// Shallow Extend
-(function(){
-	var a = {a:1}, b = {b:2}
-	var c = require('extendr').extend(a,b)
-	console.log(a) // {a:1,b:2}
-	console.log(b) // {b:2}
-	console.log(c) // {a:1,b:2}
-})()
-```
-
-### Methods
-
-- `clone(args...)` - shallow extend the arguments into a new object, same as `extend({},args...)`
-- `deepClone(args...)` - deep extend the arguments into a new object, same as `deepExtend({},args...)`
-- `dereference(obj)` - return a copy of the object with all references destroyed, same as serializing then deserializing the object
-- `extend(args...)` - alias for `shallowExtendPlainObjects`
-- `deepExtend(args...)` - alias for `deepExtendPlainObjects`
-- `shallowExtendPlainObjects(target, args...)` - shallow extend the arguments into the target
-- `deepExtendPlainObjects(target, args...)` - deep extend the arguments into the target
-- `safeShallowExtendPlainObjects(target, objs...)` - shallow extend defined values from the arguments into the target
-- `safeDeepExtendPlainObjects(target, args...)` - deep extend defined values from the arguments into the target
-
-### Notes
-
-- Use the clone methods when you don't want to modify your first object
-- Use the extend methods when you want to modify the first argument
-- Use the dereference method when you want to make sure that nothing has any references to the old object
-- Use the safe methods when you don't want `null` and `undefined` values to overwrite a defined values
+- `require('extendr').extend(target, ...objects)` - shallow extend the properties from the objects into the target
+- `require('extendr').deep(target, ...objects)` - deep extend the properties from the objects into the target
+- `require('extendr').defaults(target, ...objects)` - shallow extend the properties from the objects into the target where the target's value is undefined or null
+- `require('extendr').deepDefaults(target, ...objects)` - deep extend the properties from the objects into the target where the target's value is undefined or null
+- `require('extendr').clone(...objects)` - deep extend the properties from the objects into a new object
+- `require('extendr').dereferenceJSON(object)` - clones the object by stringifg it, then parsing the result, to ensure all references are destroyed (objects that not plain objects or arrays will be lost)
 
 
-<!-- HISTORY -->
+### Implementation
 
-<!-- CONTRIBUTE -->
+- Extendr arguments can only be plain JavaScript objects, anything else will throw. This is intentional to guarantee consistency of references.
+- Object property values that are plain objects or arrays will be dereferenced. All other object types will keep their reference.
 
-<!-- BACKERS -->
 
-<!-- LICENSE -->
+<!-- HISTORY/ -->
+
+## History
+[Discover the change history by heading on over to the `HISTORY.md` file.](https://github.com/bevry/extendr/blob/master/HISTORY.md#files)
+
+<!-- /HISTORY -->
+
+
+<!-- CONTRIBUTE/ -->
+
+## Contribute
+
+[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/bevry/extendr/blob/master/CONTRIBUTING.md#files)
+
+<!-- /CONTRIBUTE -->
+
+
+<!-- BACKERS/ -->
+
+## Backers
+
+### Maintainers
+
+These amazing people are maintaining this project:
+
+- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+
+### Sponsors
+
+No sponsors yet! Will you be the first?
+
+[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
+[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://bevry.me/bitcoin "Donate once-off to this project using BitCoin")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](https://bevry.me/wishlist "Buy an item on our wishlist for us")
+
+### Contributors
+
+These amazing people have contributed code to this project:
+
+- [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/extendr/commits?author=balupton)
+- [sfrdmn](https://github.com/sfrdmn) — [view contributions](https://github.com/bevry/extendr/commits?author=sfrdmn)
+
+[Become a contributor!](https://github.com/bevry/extendr/blob/master/CONTRIBUTING.md#files)
+
+<!-- /BACKERS -->
+
+
+<!-- LICENSE/ -->
+
+## License
+
+Unless stated otherwise all works are:
+
+- Copyright &copy; 2013+ Bevry Pty Ltd <us@bevry.me> (https://bevry.me)
+- Copyright &copy; 2011-2012 Benjamin Lupton <b@lupton.cc> (https://balupton.com)
+
+and licensed under:
+
+- The incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://opensource.org/licenses/mit-license.php)
+
+<!-- /LICENSE -->
+
+

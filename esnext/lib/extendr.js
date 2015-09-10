@@ -1,10 +1,15 @@
 // Import
 const typeChecker = require('typechecker')
 
-// Extend with customisations
+// Internal use only: Extend with customisations
 export function custom ({defaults = false, traverse = false}, target, ...objs) {
+	if ( !typeChecker.isPlainObject(target) ) {
+		throw new Error('extendr only supports extending plain objects, target was not a plain object')
+	}
 	for ( const obj of objs ) {
-		if ( !typeChecker.isPlainObject(obj) )  continue
+		if ( !typeChecker.isPlainObject(obj) ) {
+			throw new Error('extendr only supports extending plain objects, an input was not a plain object')
+		}
 		for ( const key in obj ) {
 			if ( obj.hasOwnProperty(key) ) {
 				// if not defaults only, always overwrite
@@ -16,7 +21,7 @@ export function custom ({defaults = false, traverse = false}, target, ...objs) {
 
 				// ensure everything is new
 				if ( typeChecker.isPlainObject(newValue) ) {
-					if ( traverse ) {
+					if ( traverse && typeChecker.isPlainObject(target[key]) ) {
 						// replace current value with
 						// dereferenced merged new object
 						target[key] = custom({traverse, defaults}, {}, target[key], newValue)
@@ -52,17 +57,27 @@ export function extend (...args) {
 	return custom({}, ...args)
 }
 
-// Extend deeply
+// Extend +traverse
 export function deep (...args) {
+	return custom({traverse: true}, ...args)
+}
+
+// Extend +defaults
+export function defaults (...args) {
+	return custom({defaults: true}, ...args)
+}
+
+// Extend +traverse +defaults
+export function deepDefaults (...args) {
+	return custom({traverse: true, defaults: true}, ...args)
+}
+
+// Extend to new object +traverse
+export function clone (...args) {
 	return custom({traverse: true}, {}, ...args)
 }
 
-// Extend safely
-export function safe (...args) {
-	return custom({defaults: true}, {}, ...args)
-}
-
 // Will not keep functions
-export function dereference (source) {
+export function dereferenceJSON (source) {
 	return JSON.parse(JSON.stringify(source))
 }

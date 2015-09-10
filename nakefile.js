@@ -1,4 +1,4 @@
-// 21 August 2015
+// 11 September 2015
 // https://github.com/bevry/base
 'use strict'
 
@@ -385,11 +385,11 @@ const actions = {
 const commands = {
 	clean: 'clean up instance',
 	setup: 'setup our project for development',
-	compile: 'compile our files (includes setup)',
-	watch: 'compile our files initially, and again for each change (includes setup)',
+	compile: 'compile our files',
+	watch: 'compile our files initially, and again for each change',
 	verify: 'verify our project works (includes compile)',
 	meta: 'compile our meta files',
-	prerelease: 'prepare our project for publishing (includes verify and compile)',
+	prerelease: 'prepare our project for publishing (includes verify and meta)',
 	release: 'publish our project using npm (includes prerelease and postrelease)',
 	postrelease: 'prepare our project after publishing'
 }

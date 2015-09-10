@@ -1,5 +1,9 @@
 ## History
 
+## v3.0.0 September 11, 2015
+- Moved from CoffeeScript to ES6+
+- Rewrote to ensure reference consistency
+
 ## v2.1.0 June 29, 2013
 - Arrays now correctly deep extend
 
