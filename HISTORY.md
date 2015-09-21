@@ -1,5 +1,8 @@
 ## History
 
+## v3.0.1 September 21, 2015
+- Updated dependencies
+
 ## v3.0.0 September 11, 2015
 - Moved from CoffeeScript to ES6+
 - Rewrote to ensure reference consistency
