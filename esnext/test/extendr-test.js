@@ -1,4 +1,5 @@
-/* eslint quote-props:0 new-cap:0 */
+/* eslint quote-props:0 new-cap:0, object-shorthand:0, no-magic-numbers:0, no-unused-vars:0 */
+'use strict'
 
 // Import
 const assertHelpers = require('assert-helpers')
@@ -335,7 +336,7 @@ joe.suite('extendr', function (suite, test) {
 		const t = true
 		const s = 'string'
 		const a = [1, 2]
-		const m = function () {}
+		function m () {}
 		const c = class {
 			constructor () {
 				this.p = 2

@@ -1,8 +1,10 @@
+'use strict'
+
 // Import
 const typeChecker = require('typechecker')
 
 // Internal use only: Extend with customisations
-export function custom ({defaults = false, traverse = false}, target, ...objs) {
+function custom ({defaults = false, traverse = false}, target, ...objs) {
 	if ( !typeChecker.isPlainObject(target) ) {
 		throw new Error('extendr only supports extending plain objects, target was not a plain object')
 	}
@@ -17,7 +19,7 @@ export function custom ({defaults = false, traverse = false}, target, ...objs) {
 				const defaultSkip = defaults && target[key] != null
 
 				// get the new value
-				let newValue = obj[key]
+				const newValue = obj[key]
 
 				// ensure everything is new
 				if ( typeChecker.isPlainObject(newValue) ) {
@@ -53,31 +55,42 @@ export function custom ({defaults = false, traverse = false}, target, ...objs) {
 }
 
 // Extend without customisations
-export function extend (...args) {
+function extend (...args) {
 	return custom({}, ...args)
 }
 
 // Extend +traverse
-export function deep (...args) {
+function deep (...args) {
 	return custom({traverse: true}, ...args)
 }
 
 // Extend +defaults
-export function defaults (...args) {
+function defaults (...args) {
 	return custom({defaults: true}, ...args)
 }
 
 // Extend +traverse +defaults
-export function deepDefaults (...args) {
+function deepDefaults (...args) {
 	return custom({traverse: true, defaults: true}, ...args)
 }
 
 // Extend to new object +traverse
-export function clone (...args) {
+function clone (...args) {
 	return custom({traverse: true}, {}, ...args)
 }
 
 // Will not keep functions
-export function dereferenceJSON (source) {
+function dereferenceJSON (source) {
 	return JSON.parse(JSON.stringify(source))
+}
+
+// Export
+module.exports = {
+	custom,
+	extend,
+	deep,
+	defaults,
+	deepDefaults,
+	clone,
+	dereferenceJSON
 }
