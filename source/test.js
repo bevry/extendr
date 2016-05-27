@@ -1,10 +1,9 @@
-/* eslint quote-props:0 new-cap:0, object-shorthand:0, no-magic-numbers:0, no-unused-vars:0 */
-'use strict'
+/* eslint quote-props:0 new-cap:0, object-shorthand:0, babel/object-shorthand:0, new-cap:0, babel/new-cap:0, no-unused-vars:0 */
 
 // Import
 const assertHelpers = require('assert-helpers')
 const joe = require('joe')
-const extendr = require('../../')
+const extendr = require('../')
 
 // Helper
 function delve (item, keys) {
