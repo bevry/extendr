@@ -42,7 +42,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 <a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
 <li>Install: <code>npm install --save extendr</code></li>
 <li>Module: <code>require('extendr')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/extendr@3.2.0</code></li></ul>
+<li>CDN URL: <code>//wzrd.in/bundle/extendr@3.2.1</code></li></ul>
 
 <a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
 <li>Install: <code>ender add extendr</code></li>
@@ -105,7 +105,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 
 These amazing people are maintaining this project:
 
-<ul><li><a href="https://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/extendr/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/extendr">view contributions</a></li></ul>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/extendr/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/extendr">view contributions</a></li></ul>
 
 <h3>Sponsors</h3>
 
@@ -122,7 +122,7 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="https://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/extendr/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/extendr">view contributions</a></li>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/extendr/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/extendr">view contributions</a></li>
 <li><a href="http://seanfridman.com">Sean Fridman</a> — <a href="https://github.com/bevry/extendr/commits?author=sfrdmn" title="View the GitHub contributions of Sean Fridman on repository bevry/extendr">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/extendr/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
@@ -136,8 +136,8 @@ These amazing people have contributed code to this project:
 
 Unless stated otherwise all works are:
 
-<ul><li>Copyright &copy; 2013+ <a href="https://bevry.me">Bevry Pty Ltd</a></li>
-<li>Copyright &copy; 2011-2012 <a href="https://balupton.com">Benjamin Lupton</a></li></ul>
+<ul><li>Copyright &copy; 2013+ <a href="http://bevry.me">Bevry Pty Ltd</a></li>
+<li>Copyright &copy; 2011-2012 <a href="http://balupton.com">Benjamin Lupton</a></li></ul>
 
 and licensed under:
 
