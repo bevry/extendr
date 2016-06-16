@@ -5,6 +5,7 @@
 - Removed unused editions syntax
 
 ## v3.2.0 2016 May 27
+- UNPUBLISHED due to missing engines field, replacement is v3.2.1
 - Updated internal conventions
   - Moved from [ESNextGuardian](https://github.com/bevry/esnextguardian) to [Editions](https://github.com/bevry/editions)
 
