@@ -33,4 +33,4 @@
 - Added `deepExtend` alias for `deepExtendPlainObjects`
 
 ## v2.0.0 2013 March 28
-- Split away from [bal-util](https://github.com/balupton/bal-util')
+- Split away from [bal-util](https://github.com/balupton/bal-util)
