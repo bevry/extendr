@@ -1,11 +1,15 @@
 # History
 
+## v3.2.2 2016 June 19
+- Re-added node 0.10 compatibility (regression since v3.0.0)
+  - Albeit implicit/untested compat as dev deps require node >=0.12
+
 ## v3.2.1 2016 June 16
 - Re-added missing engines property (regression since v3.2.0)
 - Removed unused editions syntax
 
 ## v3.2.0 2016 May 27
-- UNPUBLISHED due to missing engines field, replacement is v3.2.1
+- **UNPUBLISHED:** due to missing engines field, replacement is v3.2.1
 - Updated internal conventions
   - Moved from [ESNextGuardian](https://github.com/bevry/esnextguardian) to [Editions](https://github.com/bevry/editions)
 

@@ -28,16 +28,17 @@ function delve (item, keys) {
 	}
 
 	// Get the deepmost item
-	for ( const key of keys.slice(0, -1) ) {
-		item = delve(item, key)
+	const untilLast = keys.slice(0, -1)
+	for ( let i = 0; i < untilLast.length; ++i ) {
+		item = delve(item, untilLast[i])
 		if ( !item ) {
 			return
 		}
 	}
 
 	// We've gotten the deepmost item, get the value now
-	const key = keys.slice(-1)[0]
-	const result = item[key]
+	const last = keys.slice(-1)
+	const result = item[last]
 
 	// Return
 	return result

@@ -6,7 +6,8 @@ function custom ({defaults = false, traverse = false}, target, ...objs) {
 	if ( !typeChecker.isPlainObject(target) ) {
 		throw new Error('extendr only supports extending plain objects, target was not a plain object')
 	}
-	for ( const obj of objs ) {
+	for ( let objIndex = 0; objIndex < objs.length; ++objIndex ) {
+		const obj = objs[objIndex]
 		if ( !typeChecker.isPlainObject(obj) ) {
 			throw new Error('extendr only supports extending plain objects, an input was not a plain object')
 		}
