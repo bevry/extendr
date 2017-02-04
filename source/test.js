@@ -1,4 +1,5 @@
-/* eslint quote-props:0 new-cap:0, object-shorthand:0, babel/object-shorthand:0, new-cap:0, babel/new-cap:0, no-unused-vars:0 */
+/* eslint quote-props:0, new-cap:0, object-shorthand:0, new-cap:0, no-unused-vars:0, class-methods-use-this:0 */
+'use strict'
 
 // Import
 const assertHelpers = require('assert-helpers')
