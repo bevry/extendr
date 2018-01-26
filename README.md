@@ -44,7 +44,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 <a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
 <li>Install: <code>npm install --save extendr</code></li>
 <li>Module: <code>require('extendr')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/extendr@3.2.2</code></li></ul>
+<li>CDN URL: <code>//wzrd.in/bundle/extendr@3.3.0</code></li></ul>
 
 <a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
 <li>Install: <code>ender add extendr</code></li>
@@ -72,7 +72,8 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 - `require('extendr').defaults(target, ...objects)` - shallow extend the properties from the objects into the target where the target's value is undefined or null
 - `require('extendr').deepDefaults(target, ...objects)` - deep extend the properties from the objects into the target where the target's value is undefined or null
 - `require('extendr').clone(...objects)` - deep extend the properties from the objects into a new object
-- `require('extendr').dereferenceJSON(object)` - clones the object by stringifg it, then parsing the result, to ensure all references are destroyed (objects that not plain objects or arrays will be lost)
+- `require('extendr').dereference(object)` - clones the object by traversing through it and setting up new instances of anything that can be referenced
+- `require('extendr').dereferenceJSON(object)` - clones the object by stringifying it, then parsing the result, to ensure all references are destroyed (objects that not plain objects or arrays will be lost)
 
 
 ### Implementation
