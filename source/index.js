@@ -125,7 +125,12 @@ function dereference (source) {
 	}
 
 	if (typeChecker.isRegExp(source)) {
-		return new RegExp(source.source, source.flags)
+		if (source.flags == null) {
+			throw new Error('extendr cannot derefence RegExps on this older version of node')
+		}
+		else {
+			return new RegExp(source.source, source.flags)
+		}
 	}
 
 	throw new Error('extendr was passed an object type that it does not know how to derefence')

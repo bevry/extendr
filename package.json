@@ -1,6 +1,6 @@
 {
   "name": "extendr",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways",
   "homepage": "https://github.com/bevry/extendr",
   "license": "MIT",

@@ -479,20 +479,38 @@ joe.suite('extendr', function (suite, test) {
 	})
 
 	suite('deference', function (suite, test) {
-		test('works with regexp', function () {
-			const hasA1 = /a/i
-			const hasA2 = extendr.dereference(hasA1)
-			assertHelpers.equal(hasA1 === hasA2, false, 'hasA1 should not be hasA2')
-			assertHelpers.equal(hasA2.test('A'), true, 'hasA2 should still function as hasA1')
-		})
+		if (/a/.flags == null) {
+			test('should not work with regexp on this version of node', function () {
+				let threwError = false
+				const hasA1 = /a/i
+				try {
+					const hasA2 = extendr.dereference(hasA1)
+				}
+				catch (err) {
+					threwError = true
+					assertHelpers.errorEqual(err, 'extendr cannot derefence RegExps on this older version of node')
+				}
+				if (threwError === false) {
+					throw new Error('no error was thrown for this version of node')
+				}
+			})
+		}
+		else {
+			test('works with regexp', function () {
+				const hasA1 = /a/i
+				const hasA2 = extendr.dereference(hasA1)
+				assertHelpers.equal(hasA1 === hasA2, false, 'hasA1 should not be hasA2')
+				assertHelpers.equal(hasA2.test('A'), true, 'hasA2 should still function as hasA1')
+			})
 
-		test('works with nested regexp', function () {
-			const o1 = { hasA: /a/i }
-			const o2 = extendr.dereference(o1)
-			assertHelpers.equal(o1 === o2, false, 'o1 should not be o2')
-			assertHelpers.equal(o1.hasA === o2.hasA, false, 'o1.hasA should not be o2.hasA')
-			assertHelpers.equal(o2.hasA.test('A'), true, 'o2.hasA should still function as o1.hasA')
-		})
+			test('works with nested regexp', function () {
+				const o1 = { hasA: /a/i }
+				const o2 = extendr.dereference(o1)
+				assertHelpers.equal(o1 === o2, false, 'o1 should not be o2')
+				assertHelpers.equal(o1.hasA === o2.hasA, false, 'o1.hasA should not be o2.hasA')
+				assertHelpers.equal(o2.hasA.test('A'), true, 'o2.hasA should still function as o1.hasA')
+			})
+		}
 
 	})
 

@@ -1,5 +1,8 @@
 # History
 
+## v3.3.1 2018 January 26
+- Only support `dereference` on RegExp, on environments that support it
+
 ## v3.3.0 2018 January 26
 - Added `dereference` as an alternative for `dereferenceJSON`
 - Updated base files
