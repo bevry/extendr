@@ -65,22 +65,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 
 ## Usage
 
-### API
-
-- `require('extendr').extend(target, ...objects)` - shallow extend the properties from the objects into the target
-- `require('extendr').deep(target, ...objects)` - deep extend the properties from the objects into the target
-- `require('extendr').defaults(target, ...objects)` - shallow extend the properties from the objects into the target where the target's value is undefined or null
-- `require('extendr').deepDefaults(target, ...objects)` - deep extend the properties from the objects into the target where the target's value is undefined or null
-- `require('extendr').clone(...objects)` - deep extend the properties from the objects into a new object
-- `require('extendr').dereference(object)` - clones the object by traversing through it and setting up new instances of anything that can be referenced
-- `require('extendr').dereferenceJSON(object)` - clones the object by stringifying it, then parsing the result, to ensure all references are destroyed (objects that not plain objects or arrays will be lost)
-
-
-### Implementation
-
-- Extendr arguments can only be plain JavaScript objects, anything else will throw. This is intentional to guarantee consistency of references.
-- Object property values that are plain objects or arrays will be dereferenced. All other object types will keep their reference.
-
+[Complete API Documentation.](https://master.extendr.bevry.surge.sh/docs/)
 
 <!-- HISTORY/ -->
 

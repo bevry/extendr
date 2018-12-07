@@ -3,15 +3,37 @@
 // Import
 const typeChecker = require('typechecker')
 
-// Internal use only: Extend with customisations
-function custom({ defaults = false, traverse = false }, target, ...objs) {
+/**
+ * The options that are available to customise the behaviour of {@link custom}.
+ * @typedef {object} Options
+ * @property {boolean} [defaults=false] Only extend with a source value, if the target value is null or undefined.
+ * @property {boolean} [traverse=false] If false, a shallow extend will be performed, if a true a deep/nested extend will be performed.
+ */
+
+/**
+ * Extend target with the objects, with customisations.
+ *
+ * Target and sources can only be plain objects, any other type will throw, this is intentional to guarantee consistency of references.
+ * Source values that are injected, will be dereferenced if they are plain objects or arrays.
+ *
+ * Plain Objects and Arrays will be dereferenced. All other types will keep their reference.
+ *
+ * @private
+ * @param {Options} options
+ * @param {object} target
+ * @param  {...object} sources
+ * @returns {object} target
+ * @throws {Error} Throws in the case that the target or a source was not a plain object.
+ */
+function custom(options, target, ...sources) {
+	const { defaults = false, traverse = false } = options
 	if (!typeChecker.isPlainObject(target)) {
 		throw new Error(
 			'extendr only supports extending plain objects, target was not a plain object'
 		)
 	}
-	for (let objIndex = 0; objIndex < objs.length; ++objIndex) {
-		const obj = objs[objIndex]
+	for (let objIndex = 0; objIndex < sources.length; ++objIndex) {
+		const obj = sources[objIndex]
 		if (!typeChecker.isPlainObject(obj)) {
 			throw new Error(
 				'extendr only supports extending plain objects, an input was not a plain object'
@@ -61,37 +83,80 @@ function custom({ defaults = false, traverse = false }, target, ...objs) {
 	return target
 }
 
-// Extend without customisations
-function extend(...args) {
-	return custom({}, ...args)
+/**
+ * Shallow extend the properties from the sources into the target.
+ * Performs {@link custom} with default options.
+ * @param {object} target
+ * @param {...object} sources
+ * @returns {object} target
+ */
+function extend(target, ...sources) {
+	return custom({}, target, ...sources)
 }
 
-// Extend +traverse
-function deep(...args) {
-	return custom({ traverse: true }, ...args)
+/**
+ * Deep extend the properties from the sources into the target.
+ * Performs {@link custom} with +traverse.
+ * @param {object} target
+ * @param {...object} sources
+ * @returns {object} target
+ */
+function deep(target, ...sources) {
+	return custom({ traverse: true }, target, ...sources)
 }
 
-// Extend +defaults
-function defaults(...args) {
-	return custom({ defaults: true }, ...args)
+/**
+ * Shallow extend the properties from the sources into the target, where the target's value is `undefined` or `null`.
+ * Performs {@link custom} with +defaults.
+ * @param {object} target
+ * @param {...object} sources
+ * @returns {object} target
+ */
+function defaults(target, ...sources) {
+	return custom({ defaults: true }, target, ...sources)
 }
 
-// Extend +traverse +defaults
-function deepDefaults(...args) {
-	return custom({ traverse: true, defaults: true }, ...args)
+/**
+ * Deep extend the properties from the sources into the target, where the target's value is `undefined` or `null`.
+ * Performs {@link custom} with +traverse +defaults.
+ * @param {object} target
+ * @param {...object} sources
+ * @returns {object} target
+ */
+function deepDefaults(target, ...sources) {
+	return custom({ traverse: true, defaults: true }, target, ...sources)
 }
 
-// Extend to new object +traverse
-function clone(...args) {
-	return custom({ traverse: true }, {}, ...args)
+/**
+ * Deep extends the properties from the sources into a new object.
+ * Performs {@link custom} with +traverse.
+ * @param {...object} sources
+ * @returns {object} target
+ */
+function clone(...sources) {
+	return custom({ traverse: true }, {}, ...sources)
 }
 
-// Will not keep functions or regexp
+/**
+ * Clones the object by stringifying it, then parsing the result, to ensure all references are destroyed.
+ * Only serialisable values are kept, this means:
+ * - Objects that are neither a Plain Object nor an Array will be lost.
+ * - Class Instances, Functions and Regular Expressions will be discarded.
+ * @param {object} source
+ * @returns {object} dereferenced source
+ */
 function dereferenceJSON(source) {
 	return JSON.parse(JSON.stringify(source))
 }
 
-// Dereference most things, including RegExp, but not functions or classes
+/**
+ * Clones the object by traversing through it and setting up new instances of anything that can be referenced.
+ * Dereferences most things, including Regular Expressions.
+ * Will not dereference functions and classes, they will throw.
+ * @param {object} source
+ * @returns {object} dereferenced source
+ * @throws {Error} Throws in the case it encounters something it cannot dereference.
+ */
 function dereference(source) {
 	if (typeChecker.isString(source)) {
 		return source.toString()

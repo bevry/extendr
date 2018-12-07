@@ -2,6 +2,7 @@
 
 ## v3.4.0 2018 December 8
 
+-   [Added JSDoc Documentation.](https://master.extendr.bevry.surge.sh/docs/)
 -   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
 
 ## v3.3.1 2018 January 26
