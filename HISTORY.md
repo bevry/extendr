@@ -1,5 +1,9 @@
 # History
 
+## v3.4.0 2018 December 8
+
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v3.3.1 2018 January 26
 
 -   Only support `dereference` on RegExp, on environments that support it
