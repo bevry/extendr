@@ -4,14 +4,18 @@
 const typeChecker = require('typechecker')
 
 // Internal use only: Extend with customisations
-function custom ({ defaults = false, traverse = false }, target, ...objs) {
+function custom({ defaults = false, traverse = false }, target, ...objs) {
 	if (!typeChecker.isPlainObject(target)) {
-		throw new Error('extendr only supports extending plain objects, target was not a plain object')
+		throw new Error(
+			'extendr only supports extending plain objects, target was not a plain object'
+		)
 	}
 	for (let objIndex = 0; objIndex < objs.length; ++objIndex) {
 		const obj = objs[objIndex]
 		if (!typeChecker.isPlainObject(obj)) {
-			throw new Error('extendr only supports extending plain objects, an input was not a plain object')
+			throw new Error(
+				'extendr only supports extending plain objects, an input was not a plain object'
+			)
 		}
 		for (const key in obj) {
 			if (obj.hasOwnProperty(key)) {
@@ -27,21 +31,23 @@ function custom ({ defaults = false, traverse = false }, target, ...objs) {
 					if (traverse && typeChecker.isPlainObject(target[key])) {
 						// replace current value with
 						// dereferenced merged new object
-						target[key] = custom({ traverse, defaults }, {}, target[key], newValue)
-					}
-					else if (!defaultSkip) {
+						target[key] = custom(
+							{ traverse, defaults },
+							{},
+							target[key],
+							newValue
+						)
+					} else if (!defaultSkip) {
 						// replace current value with
 						// dereferenced new object
 						target[key] = custom({ defaults }, {}, newValue)
 					}
-				}
-				else if (!defaultSkip) {
+				} else if (!defaultSkip) {
 					if (typeChecker.isArray(newValue)) {
 						// replace current value with
 						// dereferenced new array
 						target[key] = newValue.slice()
-					}
-					else {
+					} else {
 						// replace current value with
 						// possibly referenced: function, class, etc
 						// possibly unreferenced: string
@@ -56,37 +62,37 @@ function custom ({ defaults = false, traverse = false }, target, ...objs) {
 }
 
 // Extend without customisations
-function extend (...args) {
+function extend(...args) {
 	return custom({}, ...args)
 }
 
 // Extend +traverse
-function deep (...args) {
+function deep(...args) {
 	return custom({ traverse: true }, ...args)
 }
 
 // Extend +defaults
-function defaults (...args) {
+function defaults(...args) {
 	return custom({ defaults: true }, ...args)
 }
 
 // Extend +traverse +defaults
-function deepDefaults (...args) {
+function deepDefaults(...args) {
 	return custom({ traverse: true, defaults: true }, ...args)
 }
 
 // Extend to new object +traverse
-function clone (...args) {
+function clone(...args) {
 	return custom({ traverse: true }, {}, ...args)
 }
 
 // Will not keep functions or regexp
-function dereferenceJSON (source) {
+function dereferenceJSON(source) {
 	return JSON.parse(JSON.stringify(source))
 }
 
 // Dereference most things, including RegExp, but not functions or classes
-function dereference (source) {
+function dereference(source) {
 	if (typeChecker.isString(source)) {
 		return source.toString()
 	}
@@ -115,7 +121,7 @@ function dereference (source) {
 	}
 
 	if (typeChecker.isArray(source)) {
-		return source.map(function (item) {
+		return source.map(function(item) {
 			return dereference(item)
 		})
 	}
@@ -126,14 +132,17 @@ function dereference (source) {
 
 	if (typeChecker.isRegExp(source)) {
 		if (source.flags == null) {
-			throw new Error('extendr cannot derefence RegExps on this older version of node')
-		}
-		else {
+			throw new Error(
+				'extendr cannot derefence RegExps on this older version of node'
+			)
+		} else {
 			return new RegExp(source.source, source.flags)
 		}
 	}
 
-	throw new Error('extendr was passed an object type that it does not know how to derefence')
+	throw new Error(
+		'extendr was passed an object type that it does not know how to derefence'
+	)
 }
 
 // Export

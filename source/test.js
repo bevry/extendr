@@ -3,11 +3,11 @@
 
 // Import
 const assertHelpers = require('assert-helpers')
-const joe = require('joe')
+const kava = require('kava')
 const extendr = require('../')
 
 // Helper
-function delve (item, keys) {
+function delve(item, keys) {
 	// Split keys if they are a string
 	if (typeof keys === 'string') {
 		keys = keys.split('.')
@@ -46,54 +46,66 @@ function delve (item, keys) {
 }
 
 // Test
-joe.suite('extendr', function (suite, test) {
+kava.suite('extendr', function(suite, test) {
 	// Prepare
-	function getOriginalData () {
+	function getOriginalData() {
 		return {
 			object: {
 				object: {
 					array: [0],
-					function: function () { return 0 },
+					function: function() {
+						return 0
+					},
 					number: 0,
 					empty: null,
 					base: 0,
 					originalStranger: 0
 				},
 				array: [0],
-				function: function () { return 0 },
+				function: function() {
+					return 0
+				},
 				number: 0,
 				empty: null,
 				base: 0,
 				originalStranger: 0
 			},
 			array: [0],
-			function: function () { return 0 },
+			function: function() {
+				return 0
+			},
 			number: 0,
 			empty: null,
 			base: 0,
 			originalStranger: 0
 		}
 	}
-	function getInputData () {
+	function getInputData() {
 		return {
 			object: {
 				object: {
 					array: [1],
-					function: function () { return 1 },
+					function: function() {
+						return 1
+					},
 					number: 1,
 					empty: 1,
 					base: null,
 					inputStranger: 1
 				},
 				array: [1],
-				function: function () { return 1 },
+				function: function() {
+					return 1
+				},
 				number: 1,
 				empty: 1,
 				base: null,
 				inputStranger: 1
 			},
 			array: [1],
-			function: function () { return 1 },
+			function: function() {
+				return 1
+			},
 			number: 1,
 			empty: 1,
 			base: null,
@@ -101,59 +113,83 @@ joe.suite('extendr', function (suite, test) {
 		}
 	}
 
-	function check ({ suite, test, original, input, output, values, references }) {
-		test('values were as expected', function () {
+	function check({ suite, test, original, input, output, values, references }) {
+		test('values were as expected', function() {
 			assertHelpers.deepEqual(output, values)
 		})
-		Object.keys(references).forEach(function (key) {
+		Object.keys(references).forEach(function(key) {
 			const reference = references[key]
 			const outputValue = delve(output, key)
 			const inputValue = delve(input, key)
 			const originalValue = delve(original, key)
-			test(`${key} should reference ${reference}`, function () {
+			test(`${key} should reference ${reference}`, function() {
 				if (reference === 'new') {
-					assertHelpers.equal(outputValue === inputValue, false, 'should not reference input value')
-					assertHelpers.equal(outputValue === originalValue, false, 'should not reference original value')
-				}
-				else if (reference === 'input') {
-					assertHelpers.equal(outputValue === inputValue, true, 'should reference input value')
-					assertHelpers.equal(outputValue === originalValue, false, 'should not reference original value')
-				}
-				else if (reference === 'original') {
-					assertHelpers.equal(outputValue === inputValue, false, 'should not reference input value')
-					assertHelpers.equal(outputValue === originalValue, true, 'should reference original value')
+					assertHelpers.equal(
+						outputValue === inputValue,
+						false,
+						'should not reference input value'
+					)
+					assertHelpers.equal(
+						outputValue === originalValue,
+						false,
+						'should not reference original value'
+					)
+				} else if (reference === 'input') {
+					assertHelpers.equal(
+						outputValue === inputValue,
+						true,
+						'should reference input value'
+					)
+					assertHelpers.equal(
+						outputValue === originalValue,
+						false,
+						'should not reference original value'
+					)
+				} else if (reference === 'original') {
+					assertHelpers.equal(
+						outputValue === inputValue,
+						false,
+						'should not reference input value'
+					)
+					assertHelpers.equal(
+						outputValue === originalValue,
+						true,
+						'should reference original value'
+					)
 				}
 			})
 		})
 	}
 
-	suite('extend', function (suite, test) {
+	suite('extend', function(suite, test) {
 		const original = getOriginalData()
 		const input = getInputData()
 		const values = {
 			// note that the objects are new, instead of the input values directly
 			// this derefencing is important, as it ensures that data never gets mashed up
 			// see the derefencing test for more information
-			object: {  // new
-				object: {  // new
-					array: [1],  // new
-					function: input.object.object.function,  // input
+			object: {
+				// new
+				object: {
+					// new
+					array: [1], // new
+					function: input.object.object.function, // input
 					number: 1,
 					empty: 1,
 					base: null,
 					// notice how originalStranger is missing, this is important
 					inputStranger: 1
 				},
-				array: [1],  // new
-				function: input.object.function,  // input
+				array: [1], // new
+				function: input.object.function, // input
 				number: 1,
 				empty: 1,
 				base: null,
 				// notice how originalStranger is missing, this is important
 				inputStranger: 1
 			},
-			array: [1],  // new
-			function: input.function,  // input
+			array: [1], // new
+			function: input.function, // input
 			number: 1,
 			empty: 1,
 			base: null,
@@ -161,9 +197,9 @@ joe.suite('extendr', function (suite, test) {
 			inputStranger: 1
 		}
 		const references = {
-			'object': 'new',
-			'array': 'new',
-			'function': 'input',
+			object: 'new',
+			array: 'new',
+			function: 'input',
 			'object.object': 'new',
 			'object.array': 'new',
 			'object.function': 'input',
@@ -174,30 +210,32 @@ joe.suite('extendr', function (suite, test) {
 		check({ suite, test, original, input, output, values, references })
 	})
 
-	suite('extend with traverse', function (suite, test) {
+	suite('extend with traverse', function(suite, test) {
 		const origin = getOriginalData()
 		const input = getInputData()
 		const values = {
-			object: {  // new
-				object: {  // new
-					array: [1],  // new
-					function: input.object.object.function,  // input
+			object: {
+				// new
+				object: {
+					// new
+					array: [1], // new
+					function: input.object.object.function, // input
 					number: 1,
 					empty: 1,
 					base: null,
-					originalStranger: 0,  // notice my presence
+					originalStranger: 0, // notice my presence
 					inputStranger: 1
 				},
-				array: [1],  // new
-				function: input.object.function,  // input
+				array: [1], // new
+				function: input.object.function, // input
 				number: 1,
 				empty: 1,
 				base: null,
-				originalStranger: 0,  // notice my presence
+				originalStranger: 0, // notice my presence
 				inputStranger: 1
 			},
-			array: [1],  // new
-			function: input.function,  // input
+			array: [1], // new
+			function: input.function, // input
 			number: 1,
 			empty: 1,
 			base: null,
@@ -205,9 +243,9 @@ joe.suite('extendr', function (suite, test) {
 			inputStranger: 1
 		}
 		const references = {
-			'object': 'new',
-			'array': 'new',
-			'function': 'input',
+			object: 'new',
+			array: 'new',
+			function: 'input',
 			'object.object': 'new',
 			'object.array': 'new',
 			'object.function': 'input',
@@ -218,36 +256,64 @@ joe.suite('extendr', function (suite, test) {
 		check({ suite, test, origin, input, output, values, references })
 	})
 
-	test('extend dereference example', function () {
+	test('extend dereference example', function() {
 		const database = {}
 
 		const plainUser = {}
 		plainUser.name = 'Plain Object User'
 
-		class User { }
+		class User {}
 		const classUser = new User()
 		classUser.name = 'Class Instance User'
 
 		const users = { plainUser, classUser }
 		extendr.extend(database, { users })
 
-		assertHelpers.equal(database.users === users, false, 'database.users should not be users object, but a new object')
-		assertHelpers.equal(database.users.plainUser === plainUser, false, 'database.users.plainUser should not be plainUser object, but a new object')
-		assertHelpers.equal(database.users.classUser === classUser, true, 'database.users.classUser should be classUser object, as only arrays and plain objects are dereferenced')
+		assertHelpers.equal(
+			database.users === users,
+			false,
+			'database.users should not be users object, but a new object'
+		)
+		assertHelpers.equal(
+			database.users.plainUser === plainUser,
+			false,
+			'database.users.plainUser should not be plainUser object, but a new object'
+		)
+		assertHelpers.equal(
+			database.users.classUser === classUser,
+			true,
+			'database.users.classUser should be classUser object, as only arrays and plain objects are dereferenced'
+		)
 
 		users.plainUser.nickname = 'Plainy'
-		assertHelpers.equal(database.users.plainUser.nickname || null, null, 'plainUser\'s nickname should not exist in database, as it was applied to plainUser object not the new object')
+		assertHelpers.equal(
+			database.users.plainUser.nickname || null,
+			null,
+			"plainUser's nickname should not exist in database, as it was applied to plainUser object not the new object"
+		)
 
 		users.classUser.nickname = 'Classy'
-		assertHelpers.equal(database.users.classUser.nickname, 'Classy', 'classUser\'s nickname should exist in database, as classUser object was not dereferenced')
+		assertHelpers.equal(
+			database.users.classUser.nickname,
+			'Classy',
+			"classUser's nickname should exist in database, as classUser object was not dereferenced"
+		)
 
 		users.santa = {}
 		users.santa.name = 'Santa Claus'
-		assertHelpers.equal(database.users.santa || null, null, 'santa should not exist in database, as it was applied to users object not the new database users object')
+		assertHelpers.equal(
+			database.users.santa || null,
+			null,
+			'santa should not exist in database, as it was applied to users object not the new database users object'
+		)
 
 		database.users.bunny = {}
 		database.users.bunny.name = 'Easter Bunny'
-		assertHelpers.equal(users.bunny || null, null, 'bunny should not exist in users, as it was applied to the new database users object not the users object')
+		assertHelpers.equal(
+			users.bunny || null,
+			null,
+			'bunny should not exist in users, as it was applied to the new database users object not the users object'
+		)
 
 		/*
 		Why is this done this way?
@@ -304,7 +370,7 @@ joe.suite('extendr', function (suite, test) {
 		*/
 	})
 
-	test('extend dereference comment example', function () {
+	test('extend dereference comment example', function() {
 		const a1 = { z: 1 }
 		const a2 = { z: 2 }
 		const b1 = { z: 1 }
@@ -315,105 +381,245 @@ joe.suite('extendr', function (suite, test) {
 
 		// a1 reference was abandoned, as it was replaced by a new clean object
 		a1.z = 3
-		assertHelpers.equal(o1.a.z, 2, 'o1.a.z should be the extended value, not the manual set value')
+		assertHelpers.equal(
+			o1.a.z,
+			2,
+			'o1.a.z should be the extended value, not the manual set value'
+		)
 
 		// a2 reference was abandoned, as it was replaced by a new clean object
 		a2.z = 4
-		assertHelpers.equal(o1.a.z, 2, 'o1.a.z should be the original value, not the manual set value')
+		assertHelpers.equal(
+			o1.a.z,
+			2,
+			'o1.a.z should be the original value, not the manual set value'
+		)
 
 		// b1 reference is kept, as it was not touched
 		b1.z = 5
-		assertHelpers.equal(o1.b.z, 5, 'o1.b.z should be the manual value, not the old extended value')
+		assertHelpers.equal(
+			o1.b.z,
+			5,
+			'o1.b.z should be the manual value, not the old extended value'
+		)
 
 		// c2 reference was abandoned, as it was replaced by a new clean object
 		c2.z = 6
-		assertHelpers.equal(o1.c.z, 2, 'o1.c.z should be the extended value, not the manual set value')
+		assertHelpers.equal(
+			o1.c.z,
+			2,
+			'o1.c.z should be the extended value, not the manual set value'
+		)
 	})
 
-	test('extend handles edge cases correctly', function () {
+	test('extend handles edge cases correctly', function() {
 		let tmp = null
 		const n = null
 		const f = false
 		const t = true
 		const s = 'string'
 		const a = [1, 2]
-		function m () { }
+		function m() {}
 		const c = class {
-			constructor () {
+			constructor() {
 				this.p = 2
 			}
-			f () {
+			f() {
 				return 2
 			}
-			static s () {
+			static s() {
 				return 2
 			}
 		}
 		const i = new c()
 		const o = { n: 'nested' }
 
-		const targetError = 'extendr only supports extending plain objects, target was not a plain object'
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, n), targetError, 'using null as target')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, f), targetError, 'using false as target')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, t), targetError, 'using true as target')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, s), targetError, 'using string as target')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, a), targetError, 'using array as target')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, m), targetError, 'using function as target')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, c), targetError, 'using class as target')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, i), targetError, 'using instance as target')
+		const targetError =
+			'extendr only supports extending plain objects, target was not a plain object'
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, n),
+			targetError,
+			'using null as target'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, f),
+			targetError,
+			'using false as target'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, t),
+			targetError,
+			'using true as target'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, s),
+			targetError,
+			'using string as target'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, a),
+			targetError,
+			'using array as target'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, m),
+			targetError,
+			'using function as target'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, c),
+			targetError,
+			'using class as target'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, i),
+			targetError,
+			'using instance as target'
+		)
 
-		const inputError = 'extendr only supports extending plain objects, an input was not a plain object'
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, n), inputError, 'using null as input')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, f), inputError, 'using false as input')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, t), inputError, 'using true as input')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, s), inputError, 'using string as input')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, a), inputError, 'using array as input')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, m), inputError, 'using function as input')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, c), inputError, 'using class as input')
-		assertHelpers.expectFunctionToThrow(extendr.extend.bind(null, {}, i), inputError, 'using instance as input')
+		const inputError =
+			'extendr only supports extending plain objects, an input was not a plain object'
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, n),
+			inputError,
+			'using null as input'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, f),
+			inputError,
+			'using false as input'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, t),
+			inputError,
+			'using true as input'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, s),
+			inputError,
+			'using string as input'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, a),
+			inputError,
+			'using array as input'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, m),
+			inputError,
+			'using function as input'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, c),
+			inputError,
+			'using class as input'
+		)
+		assertHelpers.expectFunctionToThrow(
+			extendr.extend.bind(null, {}, i),
+			inputError,
+			'using instance as input'
+		)
 
 		assertHelpers.deepEqual(extendr.extend(o), o, 'single argument works')
-		assertHelpers.equal(extendr.extend(o), o, 'single argument reference is correct')
+		assertHelpers.equal(
+			extendr.extend(o),
+			o,
+			'single argument reference is correct'
+		)
 		assertHelpers.deepEqual(extendr.extend({}, o), o, 'object extension works')
-		assertHelpers.equal(extendr.extend(tmp = {}, o), tmp, 'object extension reference is correct')
+		assertHelpers.equal(
+			extendr.extend((tmp = {}), o),
+			tmp,
+			'object extension reference is correct'
+		)
 
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: n }), { p: n }, 'property was overwritten with null')
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: f }), { p: f }, 'property was overwritten with false')
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: t }), { p: t }, 'property was overwritten with true')
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: s }), { p: s }, 'property was overwritten with string')
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: a }), { p: a }, 'property was overwritten with array')
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: m }), { p: m }, 'property was overwritten with method')
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: c }), { p: c }, 'property was overwritten with class')
-		assertHelpers.deepEqual(extendr.extend({ p: {} }, { p: i }), { p: i }, 'property was overwritten with instance')
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: n }),
+			{ p: n },
+			'property was overwritten with null'
+		)
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: f }),
+			{ p: f },
+			'property was overwritten with false'
+		)
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: t }),
+			{ p: t },
+			'property was overwritten with true'
+		)
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: s }),
+			{ p: s },
+			'property was overwritten with string'
+		)
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: a }),
+			{ p: a },
+			'property was overwritten with array'
+		)
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: m }),
+			{ p: m },
+			'property was overwritten with method'
+		)
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: c }),
+			{ p: c },
+			'property was overwritten with class'
+		)
+		assertHelpers.deepEqual(
+			extendr.extend({ p: {} }, { p: i }),
+			{ p: i },
+			'property was overwritten with instance'
+		)
 
-		assertHelpers.equal(extendr.extend({ p: {} }, { p: a }).p === a, false, 'property was overwritten with array and reference was destroyed')
-		assertHelpers.equal(extendr.extend({ p: {} }, { p: m }).p, m, 'property was overwritten with method and reference was maintained')
-		assertHelpers.equal(extendr.extend({ p: {} }, { p: c }).p, c, 'property was overwritten with class and reference was maintained')
-		assertHelpers.equal(extendr.extend({ p: {} }, { p: i }).p, i, 'property was overwritten with instance and reference was maintained')
+		assertHelpers.equal(
+			extendr.extend({ p: {} }, { p: a }).p === a,
+			false,
+			'property was overwritten with array and reference was destroyed'
+		)
+		assertHelpers.equal(
+			extendr.extend({ p: {} }, { p: m }).p,
+			m,
+			'property was overwritten with method and reference was maintained'
+		)
+		assertHelpers.equal(
+			extendr.extend({ p: {} }, { p: c }).p,
+			c,
+			'property was overwritten with class and reference was maintained'
+		)
+		assertHelpers.equal(
+			extendr.extend({ p: {} }, { p: i }).p,
+			i,
+			'property was overwritten with instance and reference was maintained'
+		)
 	})
 
-	suite('extend with defaults', function (suite, test) {
+	suite('extend with defaults', function(suite, test) {
 		const original = getOriginalData()
 		const input = getInputData()
 		const values = {
-			object: {  // new
-				object: {  // new
-					array: [0],  // new
-					function: original.object.object.function,  // original
+			object: {
+				// new
+				object: {
+					// new
+					array: [0], // new
+					function: original.object.object.function, // original
 					number: 0,
 					empty: null,
 					base: 0,
 					originalStranger: 0
 				},
-				array: [0],  // new
-				function: original.object.function,  // original
+				array: [0], // new
+				function: original.object.function, // original
 				number: 0,
 				empty: null,
 				base: 0,
 				originalStranger: 0
 			},
-			array: [0],  // new
-			function: original.function,  // original
+			array: [0], // new
+			function: original.function, // original
 			number: 0,
 			empty: 1,
 			base: 0,
@@ -421,9 +627,9 @@ joe.suite('extendr', function (suite, test) {
 			inputStranger: 1
 		}
 		const references = {
-			'object': 'new',
-			'array': 'new',
-			'function': 'origin',
+			object: 'new',
+			array: 'new',
+			function: 'origin',
 			'object.object': 'new',
 			'object.array': 'new',
 			'object.function': 'origin',
@@ -434,30 +640,32 @@ joe.suite('extendr', function (suite, test) {
 		check({ suite, test, original, input, output, values, references })
 	})
 
-	suite('extend with traverse and defaults', function (suite, test) {
+	suite('extend with traverse and defaults', function(suite, test) {
 		const original = getOriginalData()
 		const input = getInputData()
 		const values = {
-			object: {  // new
-				object: {  // new
-					array: [0],  // new
-					function: original.object.object.function,  // original
+			object: {
+				// new
+				object: {
+					// new
+					array: [0], // new
+					function: original.object.object.function, // original
 					number: 0,
 					empty: 1,
 					base: 0,
 					originalStranger: 0,
 					inputStranger: 1
 				},
-				array: [0],  // new
-				function: original.object.function,  // original
+				array: [0], // new
+				function: original.object.function, // original
 				number: 0,
 				empty: 1,
 				base: 0,
 				originalStranger: 0,
 				inputStranger: 1
 			},
-			array: [0],  // new
-			function: original.function,  // original
+			array: [0], // new
+			function: original.function, // original
 			number: 0,
 			empty: 1,
 			base: 0,
@@ -465,9 +673,9 @@ joe.suite('extendr', function (suite, test) {
 			inputStranger: 1
 		}
 		const references = {
-			'object': 'new',
-			'array': 'new',
-			'function': 'origin',
+			object: 'new',
+			array: 'new',
+			function: 'origin',
 			'object.object': 'new',
 			'object.array': 'new',
 			'object.function': 'origin',
@@ -478,40 +686,51 @@ joe.suite('extendr', function (suite, test) {
 		check({ suite, test, original, input, output, values, references })
 	})
 
-	suite('deference', function (suite, test) {
+	suite('deference', function(suite, test) {
 		if (/a/.flags == null) {
-			test('should not work with regexp on this version of node', function () {
+			test('should not work with regexp on this version of node', function() {
 				let threwError = false
 				const hasA1 = /a/i
 				try {
 					const hasA2 = extendr.dereference(hasA1)
-				}
-				catch (err) {
+				} catch (err) {
 					threwError = true
-					assertHelpers.errorEqual(err, 'extendr cannot derefence RegExps on this older version of node')
+					assertHelpers.errorEqual(
+						err,
+						'extendr cannot derefence RegExps on this older version of node'
+					)
 				}
 				if (threwError === false) {
 					throw new Error('no error was thrown for this version of node')
 				}
 			})
-		}
-		else {
-			test('works with regexp', function () {
+		} else {
+			test('works with regexp', function() {
 				const hasA1 = /a/i
 				const hasA2 = extendr.dereference(hasA1)
 				assertHelpers.equal(hasA1 === hasA2, false, 'hasA1 should not be hasA2')
-				assertHelpers.equal(hasA2.test('A'), true, 'hasA2 should still function as hasA1')
+				assertHelpers.equal(
+					hasA2.test('A'),
+					true,
+					'hasA2 should still function as hasA1'
+				)
 			})
 
-			test('works with nested regexp', function () {
+			test('works with nested regexp', function() {
 				const o1 = { hasA: /a/i }
 				const o2 = extendr.dereference(o1)
 				assertHelpers.equal(o1 === o2, false, 'o1 should not be o2')
-				assertHelpers.equal(o1.hasA === o2.hasA, false, 'o1.hasA should not be o2.hasA')
-				assertHelpers.equal(o2.hasA.test('A'), true, 'o2.hasA should still function as o1.hasA')
+				assertHelpers.equal(
+					o1.hasA === o2.hasA,
+					false,
+					'o1.hasA should not be o2.hasA'
+				)
+				assertHelpers.equal(
+					o2.hasA.test('A'),
+					true,
+					'o2.hasA should still function as o1.hasA'
+				)
 			})
 		}
-
 	})
-
 })
