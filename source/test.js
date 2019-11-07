@@ -436,87 +436,87 @@ kava.suite('extendr', function(suite, test) {
 
 		const targetError =
 			'extendr only supports extending plain objects, target was not a plain object'
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, n),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, n),
 			'using null as target'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, f),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, f),
 			'using false as target'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, t),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, t),
 			'using true as target'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, s),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, s),
 			'using string as target'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, a),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, a),
 			'using array as target'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, m),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, m),
 			'using function as target'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, c),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, c),
 			'using class as target'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, i),
+		assertHelpers.expectThrowViaFunction(
 			targetError,
+			extendr.extend.bind(null, i),
 			'using instance as target'
 		)
 
 		const inputError =
 			'extendr only supports extending plain objects, an input was not a plain object'
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, n),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, n),
 			'using null as input'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, f),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, f),
 			'using false as input'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, t),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, t),
 			'using true as input'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, s),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, s),
 			'using string as input'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, a),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, a),
 			'using array as input'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, m),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, m),
 			'using function as input'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, c),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, c),
 			'using class as input'
 		)
-		assertHelpers.expectFunctionToThrow(
-			extendr.extend.bind(null, {}, i),
+		assertHelpers.expectThrowViaFunction(
 			inputError,
+			extendr.extend.bind(null, {}, i),
 			'using instance as input'
 		)
 
