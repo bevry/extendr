@@ -1,5 +1,9 @@
 # History
 
+## v3.5.0 2019 November 8
+
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v3.4.1 2018 December 8
 
 -   [Fixed documentation link.](http://master.extendr.bevry.surge.sh/docs/)
