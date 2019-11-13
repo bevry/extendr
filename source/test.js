@@ -4,7 +4,7 @@
 // Import
 const assertHelpers = require('assert-helpers')
 const kava = require('kava')
-const extendr = require('../')
+const extendr = require('./')
 
 // Helper
 function delve(item, keys) {
