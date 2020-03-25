@@ -186,7 +186,7 @@ function dereference(source) {
 	}
 
 	if (typeChecker.isArray(source)) {
-		return source.map(function(item) {
+		return source.map(function (item) {
 			return dereference(item)
 		})
 	}
@@ -219,5 +219,5 @@ module.exports = {
 	deepDefaults,
 	clone,
 	dereference,
-	dereferenceJSON
+	dereferenceJSON,
 }

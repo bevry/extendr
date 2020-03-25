@@ -46,38 +46,38 @@ function delve(item, keys) {
 }
 
 // Test
-kava.suite('extendr', function(suite, test) {
+kava.suite('extendr', function (suite, test) {
 	// Prepare
 	function getOriginalData() {
 		return {
 			object: {
 				object: {
 					array: [0],
-					function: function() {
+					function: function () {
 						return 0
 					},
 					number: 0,
 					empty: null,
 					base: 0,
-					originalStranger: 0
+					originalStranger: 0,
 				},
 				array: [0],
-				function: function() {
+				function: function () {
 					return 0
 				},
 				number: 0,
 				empty: null,
 				base: 0,
-				originalStranger: 0
+				originalStranger: 0,
 			},
 			array: [0],
-			function: function() {
+			function: function () {
 				return 0
 			},
 			number: 0,
 			empty: null,
 			base: 0,
-			originalStranger: 0
+			originalStranger: 0,
 		}
 	}
 	function getInputData() {
@@ -85,44 +85,44 @@ kava.suite('extendr', function(suite, test) {
 			object: {
 				object: {
 					array: [1],
-					function: function() {
+					function: function () {
 						return 1
 					},
 					number: 1,
 					empty: 1,
 					base: null,
-					inputStranger: 1
+					inputStranger: 1,
 				},
 				array: [1],
-				function: function() {
+				function: function () {
 					return 1
 				},
 				number: 1,
 				empty: 1,
 				base: null,
-				inputStranger: 1
+				inputStranger: 1,
 			},
 			array: [1],
-			function: function() {
+			function: function () {
 				return 1
 			},
 			number: 1,
 			empty: 1,
 			base: null,
-			inputStranger: 1
+			inputStranger: 1,
 		}
 	}
 
 	function check({ suite, test, original, input, output, values, references }) {
-		test('values were as expected', function() {
+		test('values were as expected', function () {
 			assertHelpers.deepEqual(output, values)
 		})
-		Object.keys(references).forEach(function(key) {
+		Object.keys(references).forEach(function (key) {
 			const reference = references[key]
 			const outputValue = delve(output, key)
 			const inputValue = delve(input, key)
 			const originalValue = delve(original, key)
-			test(`${key} should reference ${reference}`, function() {
+			test(`${key} should reference ${reference}`, function () {
 				if (reference === 'new') {
 					assertHelpers.equal(
 						outputValue === inputValue,
@@ -161,7 +161,7 @@ kava.suite('extendr', function(suite, test) {
 		})
 	}
 
-	suite('extend', function(suite, test) {
+	suite('extend', function (suite, test) {
 		const original = getOriginalData()
 		const input = getInputData()
 		const values = {
@@ -178,7 +178,7 @@ kava.suite('extendr', function(suite, test) {
 					empty: 1,
 					base: null,
 					// notice how originalStranger is missing, this is important
-					inputStranger: 1
+					inputStranger: 1,
 				},
 				array: [1], // new
 				function: input.object.function, // input
@@ -186,7 +186,7 @@ kava.suite('extendr', function(suite, test) {
 				empty: 1,
 				base: null,
 				// notice how originalStranger is missing, this is important
-				inputStranger: 1
+				inputStranger: 1,
 			},
 			array: [1], // new
 			function: input.function, // input
@@ -194,7 +194,7 @@ kava.suite('extendr', function(suite, test) {
 			empty: 1,
 			base: null,
 			originalStranger: 0,
-			inputStranger: 1
+			inputStranger: 1,
 		}
 		const references = {
 			object: 'new',
@@ -204,13 +204,13 @@ kava.suite('extendr', function(suite, test) {
 			'object.array': 'new',
 			'object.function': 'input',
 			'object.object.array': 'new',
-			'object.object.function': 'input'
+			'object.object.function': 'input',
 		}
 		const output = extendr.extend({}, original, input)
 		check({ suite, test, original, input, output, values, references })
 	})
 
-	suite('extend with traverse', function(suite, test) {
+	suite('extend with traverse', function (suite, test) {
 		const origin = getOriginalData()
 		const input = getInputData()
 		const values = {
@@ -224,7 +224,7 @@ kava.suite('extendr', function(suite, test) {
 					empty: 1,
 					base: null,
 					originalStranger: 0, // notice my presence
-					inputStranger: 1
+					inputStranger: 1,
 				},
 				array: [1], // new
 				function: input.object.function, // input
@@ -232,7 +232,7 @@ kava.suite('extendr', function(suite, test) {
 				empty: 1,
 				base: null,
 				originalStranger: 0, // notice my presence
-				inputStranger: 1
+				inputStranger: 1,
 			},
 			array: [1], // new
 			function: input.function, // input
@@ -240,7 +240,7 @@ kava.suite('extendr', function(suite, test) {
 			empty: 1,
 			base: null,
 			originalStranger: 0,
-			inputStranger: 1
+			inputStranger: 1,
 		}
 		const references = {
 			object: 'new',
@@ -250,13 +250,13 @@ kava.suite('extendr', function(suite, test) {
 			'object.array': 'new',
 			'object.function': 'input',
 			'object.object.array': 'new',
-			'object.object.function': 'input'
+			'object.object.function': 'input',
 		}
 		const output = extendr.deep({}, origin, input)
 		check({ suite, test, origin, input, output, values, references })
 	})
 
-	test('extend dereference example', function() {
+	test('extend dereference example', function () {
 		const database = {}
 
 		const plainUser = {}
@@ -370,7 +370,7 @@ kava.suite('extendr', function(suite, test) {
 		*/
 	})
 
-	test('extend dereference comment example', function() {
+	test('extend dereference comment example', function () {
 		const a1 = { z: 1 }
 		const a2 = { z: 2 }
 		const b1 = { z: 1 }
@@ -412,7 +412,7 @@ kava.suite('extendr', function(suite, test) {
 		)
 	})
 
-	test('extend handles edge cases correctly', function() {
+	test('extend handles edge cases correctly', function () {
 		let tmp = null
 		const n = null
 		const f = false
@@ -596,7 +596,7 @@ kava.suite('extendr', function(suite, test) {
 		)
 	})
 
-	suite('extend with defaults', function(suite, test) {
+	suite('extend with defaults', function (suite, test) {
 		const original = getOriginalData()
 		const input = getInputData()
 		const values = {
@@ -609,14 +609,14 @@ kava.suite('extendr', function(suite, test) {
 					number: 0,
 					empty: null,
 					base: 0,
-					originalStranger: 0
+					originalStranger: 0,
 				},
 				array: [0], // new
 				function: original.object.function, // original
 				number: 0,
 				empty: null,
 				base: 0,
-				originalStranger: 0
+				originalStranger: 0,
 			},
 			array: [0], // new
 			function: original.function, // original
@@ -624,7 +624,7 @@ kava.suite('extendr', function(suite, test) {
 			empty: 1,
 			base: 0,
 			originalStranger: 0,
-			inputStranger: 1
+			inputStranger: 1,
 		}
 		const references = {
 			object: 'new',
@@ -634,13 +634,13 @@ kava.suite('extendr', function(suite, test) {
 			'object.array': 'new',
 			'object.function': 'origin',
 			'object.object.array': 'new',
-			'object.object.function': 'origin'
+			'object.object.function': 'origin',
 		}
 		const output = extendr.defaults({}, original, input)
 		check({ suite, test, original, input, output, values, references })
 	})
 
-	suite('extend with traverse and defaults', function(suite, test) {
+	suite('extend with traverse and defaults', function (suite, test) {
 		const original = getOriginalData()
 		const input = getInputData()
 		const values = {
@@ -654,7 +654,7 @@ kava.suite('extendr', function(suite, test) {
 					empty: 1,
 					base: 0,
 					originalStranger: 0,
-					inputStranger: 1
+					inputStranger: 1,
 				},
 				array: [0], // new
 				function: original.object.function, // original
@@ -662,7 +662,7 @@ kava.suite('extendr', function(suite, test) {
 				empty: 1,
 				base: 0,
 				originalStranger: 0,
-				inputStranger: 1
+				inputStranger: 1,
 			},
 			array: [0], // new
 			function: original.function, // original
@@ -670,7 +670,7 @@ kava.suite('extendr', function(suite, test) {
 			empty: 1,
 			base: 0,
 			originalStranger: 0,
-			inputStranger: 1
+			inputStranger: 1,
 		}
 		const references = {
 			object: 'new',
@@ -680,15 +680,15 @@ kava.suite('extendr', function(suite, test) {
 			'object.array': 'new',
 			'object.function': 'origin',
 			'object.object.array': 'new',
-			'object.object.function': 'origin'
+			'object.object.function': 'origin',
 		}
 		const output = extendr.deepDefaults({}, original, input)
 		check({ suite, test, original, input, output, values, references })
 	})
 
-	suite('deference', function(suite, test) {
+	suite('deference', function (suite, test) {
 		if (/a/.flags == null) {
-			test('should not work with regexp on this version of node', function() {
+			test('should not work with regexp on this version of node', function () {
 				let threwError = false
 				const hasA1 = /a/i
 				try {
@@ -705,7 +705,7 @@ kava.suite('extendr', function(suite, test) {
 				}
 			})
 		} else {
-			test('works with regexp', function() {
+			test('works with regexp', function () {
 				const hasA1 = /a/i
 				const hasA2 = extendr.dereference(hasA1)
 				assertHelpers.equal(hasA1 === hasA2, false, 'hasA1 should not be hasA2')
@@ -716,7 +716,7 @@ kava.suite('extendr', function(suite, test) {
 				)
 			})
 
-			test('works with nested regexp', function() {
+			test('works with nested regexp', function () {
 				const o1 = { hasA: /a/i }
 				const o2 = extendr.dereference(o1)
 				assertHelpers.equal(o1 === o2, false, 'o1 should not be o2')
