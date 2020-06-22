@@ -153,7 +153,7 @@
   dependencies:
     "@babel/types" "^7.10.3"
 
-"@babel/helper-plugin-utils@^7.0.0", "@babel/helper-plugin-utils@^7.10.1", "@babel/helper-plugin-utils@^7.10.3", "@babel/helper-plugin-utils@^7.8.0", "@babel/helper-plugin-utils@^7.8.3":
+"@babel/helper-plugin-utils@^7.0.0", "@babel/helper-plugin-utils@^7.10.1", "@babel/helper-plugin-utils@^7.10.3", "@babel/helper-plugin-utils@^7.8.0":
   version "7.10.3"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.10.3.tgz#aac45cccf8bc1873b99a85f34bceef3beb5d3244"
   integrity sha512-j/+j8NAWUTxOtx4LKHybpSClxHoq6I91DQ/mKgAXn5oNUPIUiGppjPIX3TDtJWPrdfP9Kfl7e4fgVMiQR9VE/g==
@@ -264,7 +264,7 @@
     "@babel/helper-plugin-utils" "^7.10.1"
     "@babel/plugin-syntax-json-strings" "^7.8.0"
 
-"@babel/plugin-proposal-object-rest-spread@^7.7.4":
+"@babel/plugin-proposal-object-rest-spread@^7.7.4", "@babel/plugin-proposal-object-rest-spread@^7.9.5":
   version "7.10.3"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.10.3.tgz#b8d0d22f70afa34ad84b7a200ff772f9b9fce474"
   integrity sha512-ZZh5leCIlH9lni5bU/wB/UcjtcVLgR8gc+FAgW2OOY+m9h1II3ItTO1/cewNUcsIDZSYcSaz/rYVls+Fb0ExVQ==
@@ -272,15 +272,6 @@
     "@babel/helper-plugin-utils" "^7.10.3"
     "@babel/plugin-syntax-object-rest-spread" "^7.8.0"
     "@babel/plugin-transform-parameters" "^7.10.1"
-
-"@babel/plugin-proposal-object-rest-spread@^7.9.5":
-  version "7.9.5"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.9.5.tgz#3fd65911306d8746014ec0d0cf78f0e39a149116"
-  integrity sha512-VP2oXvAf7KCYTthbUHwBlewbl1Iq059f6seJGsxMizaCdgHIeczOr7FBqELhSqfkIl04Fi8okzWzl63UKbQmmg==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-syntax-object-rest-spread" "^7.8.0"
-    "@babel/plugin-transform-parameters" "^7.9.5"
 
 "@babel/plugin-proposal-optional-catch-binding@^7.7.4":
   version "7.10.1"
@@ -510,7 +501,7 @@
     "@babel/helper-plugin-utils" "^7.10.1"
     "@babel/helper-replace-supers" "^7.10.1"
 
-"@babel/plugin-transform-parameters@^7.10.1", "@babel/plugin-transform-parameters@^7.7.4", "@babel/plugin-transform-parameters@^7.9.5":
+"@babel/plugin-transform-parameters@^7.10.1", "@babel/plugin-transform-parameters@^7.7.4":
   version "7.10.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-parameters/-/plugin-transform-parameters-7.10.1.tgz#b25938a3c5fae0354144a720b07b32766f683ddd"
   integrity sha512-tJ1T0n6g4dXMsL45YsSzzSDZCxiHXAQp/qHrucOq5gEHncTA3xDxnd5+sZcoQp+N1ZbieAaB8r/VUCG0gqseOg==
