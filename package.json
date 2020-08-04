@@ -1,6 +1,6 @@
 {
   "name": "extendr",
-  "version": "5.12.0",
+  "version": "5.13.0",
   "description": "Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways",
   "homepage": "https://github.com/bevry/extendr",
   "license": "MIT",
@@ -105,25 +105,25 @@
   "main": "source/index.js",
   "browser": "edition-browsers/index.js",
   "dependencies": {
-    "typechecker": "^7.11.0"
+    "typechecker": "^7.12.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@bevry/update-contributors": "^1.13.0",
-    "assert-helpers": "^6.18.0",
-    "eslint": "^7.5.0",
-    "eslint-config-bevry": "^3.17.0",
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@bevry/update-contributors": "^1.14.0",
+    "assert-helpers": "^6.19.0",
+    "eslint": "^7.6.0",
+    "eslint-config-bevry": "^3.18.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "jsdoc": "^3.6.4",
-    "kava": "^5.8.0",
+    "jsdoc": "^3.6.5",
+    "kava": "^5.9.0",
     "prettier": "^2.0.5",
-    "projectz": "^2.11.0",
+    "projectz": "^2.12.0",
     "surge": "^0.21.6",
-    "valid-directory": "^2.6.0"
+    "valid-directory": "^2.7.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
