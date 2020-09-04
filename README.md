@@ -52,7 +52,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/extendr@5.14.0'
+    import * as pkg from '//dev.jspm.io/extendr@5.15.0'
 </script>
 ```
 
