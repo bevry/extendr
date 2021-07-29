@@ -35,7 +35,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 
 ## Usage
 
-[Complete API Documentation.](http://master.extendr.bevry.surge.sh/docs/index.html)
+[Complete API Documentation.](http://master.extendr.bevry.surge.sh/docs/)
 
 <!-- INSTALL/ -->
 
@@ -52,7 +52,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/extendr@5.18.0'
+    import * as pkg from '//dev.jspm.io/extendr@5.19.0'
 </script>
 ```
 
