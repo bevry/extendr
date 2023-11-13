@@ -29,14 +29,14 @@ function custom(options, target, ...sources) {
 	const { defaults = false, traverse = false } = options
 	if (!typeChecker.isPlainObject(target)) {
 		throw new Error(
-			'extendr only supports extending plain objects, target was not a plain object',
+			'extendr only supports extending plain objects, target was not a plain object'
 		)
 	}
 	for (let objIndex = 0; objIndex < sources.length; ++objIndex) {
 		const obj = sources[objIndex]
 		if (!typeChecker.isPlainObject(obj)) {
 			throw new Error(
-				'extendr only supports extending plain objects, an input was not a plain object',
+				'extendr only supports extending plain objects, an input was not a plain object'
 			)
 		}
 		for (const key in obj) {
@@ -57,7 +57,7 @@ function custom(options, target, ...sources) {
 							{ traverse, defaults },
 							{},
 							target[key],
-							newValue,
+							newValue
 						)
 					} else if (!defaultSkip) {
 						// replace current value with
@@ -198,7 +198,7 @@ function dereference(source) {
 	if (typeChecker.isRegExp(source)) {
 		if (source.flags == null) {
 			throw new Error(
-				'extendr cannot derefence RegExps on this older version of node',
+				'extendr cannot derefence RegExps on this older version of node'
 			)
 		} else {
 			return new RegExp(source.source, source.flags)
@@ -206,7 +206,7 @@ function dereference(source) {
 	}
 
 	throw new Error(
-		'extendr was passed an object type that it does not know how to derefence',
+		'extendr was passed an object type that it does not know how to derefence'
 	)
 }
 
