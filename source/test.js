@@ -127,34 +127,34 @@ kava.suite('extendr', function (suite, test) {
 					assertHelpers.equal(
 						outputValue === inputValue,
 						false,
-						'should not reference input value'
+						'should not reference input value',
 					)
 					assertHelpers.equal(
 						outputValue === originalValue,
 						false,
-						'should not reference original value'
+						'should not reference original value',
 					)
 				} else if (reference === 'input') {
 					assertHelpers.equal(
 						outputValue === inputValue,
 						true,
-						'should reference input value'
+						'should reference input value',
 					)
 					assertHelpers.equal(
 						outputValue === originalValue,
 						false,
-						'should not reference original value'
+						'should not reference original value',
 					)
 				} else if (reference === 'original') {
 					assertHelpers.equal(
 						outputValue === inputValue,
 						false,
-						'should not reference input value'
+						'should not reference input value',
 					)
 					assertHelpers.equal(
 						outputValue === originalValue,
 						true,
-						'should reference original value'
+						'should reference original value',
 					)
 				}
 			})
@@ -272,31 +272,31 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.equal(
 			database.users === users,
 			false,
-			'database.users should not be users object, but a new object'
+			'database.users should not be users object, but a new object',
 		)
 		assertHelpers.equal(
 			database.users.plainUser === plainUser,
 			false,
-			'database.users.plainUser should not be plainUser object, but a new object'
+			'database.users.plainUser should not be plainUser object, but a new object',
 		)
 		assertHelpers.equal(
 			database.users.classUser === classUser,
 			true,
-			'database.users.classUser should be classUser object, as only arrays and plain objects are dereferenced'
+			'database.users.classUser should be classUser object, as only arrays and plain objects are dereferenced',
 		)
 
 		users.plainUser.nickname = 'Plainy'
 		assertHelpers.equal(
 			database.users.plainUser.nickname || null,
 			null,
-			"plainUser's nickname should not exist in database, as it was applied to plainUser object not the new object"
+			"plainUser's nickname should not exist in database, as it was applied to plainUser object not the new object",
 		)
 
 		users.classUser.nickname = 'Classy'
 		assertHelpers.equal(
 			database.users.classUser.nickname,
 			'Classy',
-			"classUser's nickname should exist in database, as classUser object was not dereferenced"
+			"classUser's nickname should exist in database, as classUser object was not dereferenced",
 		)
 
 		users.santa = {}
@@ -304,7 +304,7 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.equal(
 			database.users.santa || null,
 			null,
-			'santa should not exist in database, as it was applied to users object not the new database users object'
+			'santa should not exist in database, as it was applied to users object not the new database users object',
 		)
 
 		database.users.bunny = {}
@@ -312,7 +312,7 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.equal(
 			users.bunny || null,
 			null,
-			'bunny should not exist in users, as it was applied to the new database users object not the users object'
+			'bunny should not exist in users, as it was applied to the new database users object not the users object',
 		)
 
 		/*
@@ -384,7 +384,7 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.equal(
 			o1.a.z,
 			2,
-			'o1.a.z should be the extended value, not the manual set value'
+			'o1.a.z should be the extended value, not the manual set value',
 		)
 
 		// a2 reference was abandoned, as it was replaced by a new clean object
@@ -392,7 +392,7 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.equal(
 			o1.a.z,
 			2,
-			'o1.a.z should be the original value, not the manual set value'
+			'o1.a.z should be the original value, not the manual set value',
 		)
 
 		// b1 reference is kept, as it was not touched
@@ -400,7 +400,7 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.equal(
 			o1.b.z,
 			5,
-			'o1.b.z should be the manual value, not the old extended value'
+			'o1.b.z should be the manual value, not the old extended value',
 		)
 
 		// c2 reference was abandoned, as it was replaced by a new clean object
@@ -408,7 +408,7 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.equal(
 			o1.c.z,
 			2,
-			'o1.c.z should be the extended value, not the manual set value'
+			'o1.c.z should be the extended value, not the manual set value',
 		)
 	})
 
@@ -439,42 +439,42 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, n),
-			'using null as target'
+			'using null as target',
 		)
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, f),
-			'using false as target'
+			'using false as target',
 		)
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, t),
-			'using true as target'
+			'using true as target',
 		)
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, s),
-			'using string as target'
+			'using string as target',
 		)
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, a),
-			'using array as target'
+			'using array as target',
 		)
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, m),
-			'using function as target'
+			'using function as target',
 		)
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, c),
-			'using class as target'
+			'using class as target',
 		)
 		assertHelpers.expectThrowViaFunction(
 			targetError,
 			extendr.extend.bind(null, i),
-			'using instance as target'
+			'using instance as target',
 		)
 
 		const inputError =
@@ -482,117 +482,117 @@ kava.suite('extendr', function (suite, test) {
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, n),
-			'using null as input'
+			'using null as input',
 		)
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, f),
-			'using false as input'
+			'using false as input',
 		)
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, t),
-			'using true as input'
+			'using true as input',
 		)
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, s),
-			'using string as input'
+			'using string as input',
 		)
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, a),
-			'using array as input'
+			'using array as input',
 		)
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, m),
-			'using function as input'
+			'using function as input',
 		)
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, c),
-			'using class as input'
+			'using class as input',
 		)
 		assertHelpers.expectThrowViaFunction(
 			inputError,
 			extendr.extend.bind(null, {}, i),
-			'using instance as input'
+			'using instance as input',
 		)
 
 		assertHelpers.deepEqual(extendr.extend(o), o, 'single argument works')
 		assertHelpers.equal(
 			extendr.extend(o),
 			o,
-			'single argument reference is correct'
+			'single argument reference is correct',
 		)
 		assertHelpers.deepEqual(extendr.extend({}, o), o, 'object extension works')
 		assertHelpers.equal(
 			extendr.extend((tmp = {}), o),
 			tmp,
-			'object extension reference is correct'
+			'object extension reference is correct',
 		)
 
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: n }),
 			{ p: n },
-			'property was overwritten with null'
+			'property was overwritten with null',
 		)
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: f }),
 			{ p: f },
-			'property was overwritten with false'
+			'property was overwritten with false',
 		)
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: t }),
 			{ p: t },
-			'property was overwritten with true'
+			'property was overwritten with true',
 		)
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: s }),
 			{ p: s },
-			'property was overwritten with string'
+			'property was overwritten with string',
 		)
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: a }),
 			{ p: a },
-			'property was overwritten with array'
+			'property was overwritten with array',
 		)
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: m }),
 			{ p: m },
-			'property was overwritten with method'
+			'property was overwritten with method',
 		)
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: c }),
 			{ p: c },
-			'property was overwritten with class'
+			'property was overwritten with class',
 		)
 		assertHelpers.deepEqual(
 			extendr.extend({ p: {} }, { p: i }),
 			{ p: i },
-			'property was overwritten with instance'
+			'property was overwritten with instance',
 		)
 
 		assertHelpers.equal(
 			extendr.extend({ p: {} }, { p: a }).p === a,
 			false,
-			'property was overwritten with array and reference was destroyed'
+			'property was overwritten with array and reference was destroyed',
 		)
 		assertHelpers.equal(
 			extendr.extend({ p: {} }, { p: m }).p,
 			m,
-			'property was overwritten with method and reference was maintained'
+			'property was overwritten with method and reference was maintained',
 		)
 		assertHelpers.equal(
 			extendr.extend({ p: {} }, { p: c }).p,
 			c,
-			'property was overwritten with class and reference was maintained'
+			'property was overwritten with class and reference was maintained',
 		)
 		assertHelpers.equal(
 			extendr.extend({ p: {} }, { p: i }).p,
 			i,
-			'property was overwritten with instance and reference was maintained'
+			'property was overwritten with instance and reference was maintained',
 		)
 	})
 
@@ -697,7 +697,7 @@ kava.suite('extendr', function (suite, test) {
 					threwError = true
 					assertHelpers.errorEqual(
 						err,
-						'extendr cannot derefence RegExps on this older version of node'
+						'extendr cannot derefence RegExps on this older version of node',
 					)
 				}
 				if (threwError === false) {
@@ -712,7 +712,7 @@ kava.suite('extendr', function (suite, test) {
 				assertHelpers.equal(
 					hasA2.test('A'),
 					true,
-					'hasA2 should still function as hasA1'
+					'hasA2 should still function as hasA1',
 				)
 			})
 
@@ -723,12 +723,12 @@ kava.suite('extendr', function (suite, test) {
 				assertHelpers.equal(
 					o1.hasA === o2.hasA,
 					false,
-					'o1.hasA should not be o2.hasA'
+					'o1.hasA should not be o2.hasA',
 				)
 				assertHelpers.equal(
 					o2.hasA.test('A'),
 					true,
-					'o2.hasA should still function as o1.hasA'
+					'o2.hasA should still function as o1.hasA',
 				)
 			})
 		}
