@@ -1,6 +1,6 @@
 {
   "name": "extendr",
-  "version": "7.5.1",
+  "version": "7.6.0",
   "description": "Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways",
   "homepage": "https://github.com/bevry/extendr",
   "license": "Artistic-2.0",
@@ -10,6 +10,7 @@
     "deepClone",
     "deepExtend",
     "dereference",
+    "es5",
     "esnext",
     "extend",
     "node",
@@ -113,6 +114,7 @@
       "tags": [
         "compiled",
         "javascript",
+        "es5",
         "require"
       ],
       "engines": {
