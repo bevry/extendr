@@ -1,5 +1,9 @@
 # History
 
+## v7.5.1 2023 December 5
+
+-   Fix bad prettier configuration that caused Node.js v6 to fail
+
 ## v7.5.0 2023 December 5
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

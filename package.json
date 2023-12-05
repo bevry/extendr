@@ -1,6 +1,6 @@
 {
   "name": "extendr",
-  "version": "7.5.0",
+  "version": "7.5.1",
   "description": "Utilities for cloning, extending, and de-referencing objects in shallow, deep, and safe ways",
   "homepage": "https://github.com/bevry/extendr",
   "license": "Artistic-2.0",
@@ -179,7 +179,7 @@
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "all",
+    "trailingComma": "es5",
     "endOfLine": "lf"
   },
   "babel": {
