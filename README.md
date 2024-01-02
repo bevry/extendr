@@ -49,7 +49,7 @@ Utilities for cloning, extending, and de-referencing objects in shallow, deep, a
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/extendr@7.9.0'
+    import * as pkg from '//dev.jspm.io/extendr@7.10.0'
 </script>
 ```
 ### [Editions](https://editions.bevry.me "Editions are the best way to produce and consume packages you care about.")
@@ -141,7 +141,7 @@ This project provides its type information via inline [JSDoc Comments](http://us
 -   [Mohammed Shah](https://github.com/smashah)
 -   [Mr. Henry](https://mrhenry.be)
 -   [Nermal](https://arjunaditya.vercel.app)
--   [Pleo](https://www.pleo.io)
+-   [Pleo](https://pleo.io)
 -   [Poonacha Medappa](https://poonachamedappa.com)
 -   [Rob Morris](https://github.com/Rob-Morris)
 -   [Robert de Forest](https://github.com/rdeforest)
