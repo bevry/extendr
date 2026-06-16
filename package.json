@@ -170,10 +170,10 @@
     "typechecker": "^9.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.4",
-    "@babel/core": "^7.23.7",
-    "@babel/plugin-transform-object-rest-spread": "^7.23.4",
-    "@babel/preset-env": "^7.23.7",
+    "@babel/cli": "^8.0.0",
+    "@babel/core": "^8.0.0",
+    "@babel/plugin-transform-object-rest-spread": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
     "assert-helpers": "^11.12.0",
     "eslint": "^8.56.0",
     "eslint-config-bevry": "^5.5.0",
